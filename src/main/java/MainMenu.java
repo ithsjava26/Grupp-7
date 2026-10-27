@@ -1,8 +1,19 @@
 
 public class MainMenu {
 
-    public static void main(String[] args) {
+    public void displayMenu() {
+        IO.println("==============================");
+        IO.println("       THE LAST SHIFT");
+        IO.println("==============================");
+        IO.println();
+        IO.println("1. Start New Game");
+        IO.println("2. Load Game");
+        IO.println("3. Exit");
+        IO.println();
+        IO.print("Choose an option: ");
+    }
 
+    static void main() {
         MainMenu mainMenu = new MainMenu();
 
         while (true) {
@@ -12,7 +23,9 @@ public class MainMenu {
 
             switch (choice) {
                 case "1":
-                    // Start new game
+                    mainMenu.startNewGame();
+                    GameplayMenu gameplayMenu = new GameplayMenu();
+                    gameplayMenu.runMenu();
                     break;
 
                 case "2":
@@ -29,16 +42,22 @@ public class MainMenu {
         }
     }
 
-    public void displayMenu() {
-        IO.println("==============================");
-        IO.println("       THE LAST SHIFT");
-        IO.println("==============================");
-        IO.println();
-        IO.println("1. Start New Game");
-        IO.println("2. Load Game");
-        IO.println("3. Exit");
-        IO.println();
-        IO.print("Choose an option: ");
+    public void startNewGame() {
+        IO.println("Your journey begins...");
+        GameUtils.pauseForUser();
+            IO.println("Choose a name for your character:");
+
+            String playerName = IO.readln();
+
+            while (playerName.isBlank()) {
+                IO.println("Please enter a name:");
+                playerName = IO.readln();
+            }
+
+            IO.println("Welcome, " + playerName + ".");
+            GameUtils.pauseForUser();
+        }
     }
-}
+
+
 
