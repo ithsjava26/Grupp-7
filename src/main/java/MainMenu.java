@@ -24,8 +24,9 @@ public class MainMenu {
             switch (choice) {
                 case "1":
                     mainMenu.startNewGame();
-                    GameplayMenu gameplayMenu = new GameplayMenu();
-                    gameplayMenu.runMenu();
+
+                    GameEngine gameEngine = new GameEngine();
+                    gameEngine.startGame();
                     break;
 
                 case "2":

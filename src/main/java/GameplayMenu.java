@@ -2,9 +2,11 @@ public class GameplayMenu {
 
     public void displayMenu() {
         IO.println();
-        IO.println("========== THE LAST SHIFT ==========");
+        IO.println("What do you want to do?");
+        IO.println();
         IO.println("1. Explore");
         IO.println("2. Inventory");
+        IO.println("3. View character status");
         IO.println("3. Save Game");
         IO.println("4. Return to Main Menu");
         IO.println();
