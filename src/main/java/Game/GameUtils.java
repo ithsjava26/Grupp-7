@@ -1,3 +1,5 @@
+package Game;
+
 public class GameUtils {
     public static void pauseForUser() {
         IO.println();

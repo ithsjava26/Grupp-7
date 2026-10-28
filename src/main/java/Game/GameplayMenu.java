@@ -1,3 +1,5 @@
+package Game;
+
 public class GameplayMenu {
 
     public void displayMenu() {

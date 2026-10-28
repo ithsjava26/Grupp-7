@@ -1,3 +1,5 @@
+package Game;
+
 public class GameEngine {
     private final World world = new World(); //creates the world and its rooms
 
