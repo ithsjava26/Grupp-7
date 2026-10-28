@@ -57,6 +57,6 @@ public abstract class GameCharacter {
         if (amount < 0) {
             throw new IllegalArgumentException("Healing amount can not be negative");
         }
-        health = Math.min(maxHealth, health + amount);
+        health = (int) Math.min((long) maxHealth, (long) health + amount);
     }
 }
