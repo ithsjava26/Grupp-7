@@ -101,6 +101,44 @@ public class World {
     public Room getStartingRoom() {
         return office;
     }
-}
 
+    public Room getRoomById(String id) {
+        if (office.id().equals(id)) {
+            return office;
+        }
+        if (officeHallway.id().equals(id)) {
+            return officeHallway;
+        }
+        if (street1.id().equals(id)) {
+            return street1;
+        }
+        if (street2.id().equals(id)) {
+            return street2;
+        }
+        if (park1.id().equals(id)) {
+            return park1;
+        }
+        if (park2.id().equals(id)) {
+            return park2;
+        }
+        if (home.id().equals(id)) {
+            return home;
+        }
+        if (upstairs.id().equals(id)) {
+            return upstairs;
+        }
+        if (garage.id().equals(id)) {
+            return garage;
+        }
+
+        return null;
+    }
+
+    public Room getNextRoom(Room currentRoom) {
+        if (currentRoom == null || currentRoom.nextRoomId() == null) {
+            return null;
+        }
+        return getRoomById(currentRoom.nextRoomId());
+    }
+}
 
