@@ -38,7 +38,8 @@ public class World {
     private final Room officeHallway = new Room(
             "office-hallway",
             "Office Hallway",
-            "Placeholder description.",
+            "You step into the hallway. Emergency lights flicker overhead, and several office doors stand open." +
+                    "The stairwell door hangs ajar at the far end and you see one of your co-workers leaning against a wall",
             List.of(),
             "street-1"
     );
@@ -46,14 +47,17 @@ public class World {
     private final Room street1 = new Room(
             "street-1",
             "Street 1",
-            "Placeholder description.",
+            "Outside, the city is barely recognizable. Cars have been abandoned at odd angles, alarms echo" +
+                    " between buildings, and distant figures move through the smoke. ...Is that gunshots? ",
             List.of(),
             "street-2"
     );
     private final Room street2 = new Room(
             "street-2",
             "Street 2",
-            "Placeholder description.",
+            "The further you walk, the louder the chaos becomes. A bus blocks part of the road, its windows " +
+                    "shattered. You trip on some debris and suddenly something starts rattling around inside the bus." +
+                    " Before you have time to react you're face-to-face with a creature you can only describe as a zombie", //FIRST COMBAT HERE?!
             List.of(),
             "park-1"
     );
@@ -61,7 +65,10 @@ public class World {
     private final Room park1 = new Room(
             "park-1",
             "Park 1",
-            "Placeholder description.",
+            "You reach a park between the buildings - your shortcut home. " +
+                    "A discarded backpack lies beside the path, and the bushes rustle somewhere out of sight. " +
+                    "You know you're almost there but you can't shake the feeling that you're being watched.",
+
             List.of(),
             "park-2"
     );
@@ -69,7 +76,9 @@ public class World {
     private final Room park2 = new Room(
             "park-2",
             "Park 2",
-            "Placeholder description.",
+            " Beyond the trees, you can see the next street leading towards a residential area... Home." +
+                    " Just as you're about to start running towards your goal, you hear a gurgling scream behind you." +
+                    "You turn around.", //SECOND COMBAT HERE - 2 enemies (bad injuries, need to use healing items)
             List.of(),
             "home"
     );
@@ -77,7 +86,8 @@ public class World {
     private final Room home = new Room(
             "home",
             "The House",
-            "Placeholder description.",
+            "The building looks untouched from the outside, but the curtains are drawn" +
+                    " and no lights are on. You have to try to find your partner. You try the front door and it's unlocked",
             List.of(),
             "upstairs"
     );
@@ -85,7 +95,9 @@ public class World {
     private final Room upstairs = new Room(
             "upstairs",
             "Upstairs",
-            "Placeholder description.",
+            "Familiar belongings are scattered across the landing, and a faint noise is coming from " +
+                    "somewhere below. You remember why you came here and force yourself to keep moving. You gotta get " +
+                    "those keys and get the hell out of here.",
             List.of(),
             "garage"
     );
@@ -93,7 +105,10 @@ public class World {
     private final Room garage = new Room(
             "garage",
             "Garage",
-            "Placeholder description.",
+            "You reach the garage. Your car is still there, but as you approach it you hear footsteps " +
+                    "dragging slowly towards you. As you turn to look you see a familiar face, warped into a zombie. " +
+                    "Your partner." //FINAL BATTLE
+            ,
             List.of(),
             null
     );
