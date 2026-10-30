@@ -222,4 +222,3 @@ public class World {
         return getRoomById(currentRoom.nextRoomId());
     }
 }
-
