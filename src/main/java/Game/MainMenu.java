@@ -23,12 +23,13 @@ public class MainMenu {
             String choice = IO.readln();
 
             switch (choice) {
-                case "1":
-                    mainMenu.startNewGame();
+                case "1": {
+                    String playerName = mainMenu.startNewGame();
 
-                    GameEngine gameEngine = new GameEngine();
+                    GameEngine gameEngine = new GameEngine(playerName);
                     gameEngine.startGame();
                     break;
+                }
 
                 case "2":
                     // Load game
@@ -44,22 +45,24 @@ public class MainMenu {
         }
     }
 
-    public void startNewGame() {
+    public String startNewGame() {
         IO.println("Your journey begins...");
         GameUtils.pauseForUser();
-            IO.println("Choose a name for your character:");
 
-            String playerName = IO.readln();
+        IO.println("Choose a name for your character:");
 
-            while (playerName.isBlank()) {
-                IO.println("Please enter a name:");
-                playerName = IO.readln();
-            }
+        String playerName = IO.readln();
 
-            IO.println("Welcome, " + playerName + ".");
-            GameUtils.pauseForUser();
+        while (playerName.isBlank()) {
+            IO.println("Please enter a name:");
+            playerName = IO.readln();
         }
-    }
 
+        IO.println("Welcome, " + playerName + ".");
+        GameUtils.pauseForUser();
+
+        return playerName;
+    }
+}
 
 

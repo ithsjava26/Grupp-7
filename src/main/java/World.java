@@ -1,5 +1,3 @@
-package Game;
-
 public class World {
     private final Room office = new Room(
             "Office",

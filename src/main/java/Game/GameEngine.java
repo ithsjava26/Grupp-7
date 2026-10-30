@@ -1,22 +1,39 @@
 package Game;
 
+import RoomMechanics.ExplorationHandler;
+import RoomMechanics.Room;
+import RoomMechanics.World;
+
 public class GameEngine {
-    private final World world = new World(); //creates the world and its rooms
+
+    private final World world = new World();
+    private final ExplorationHandler explorationHandler = new ExplorationHandler();
+    private String playerName;
+    private Room currentRoom;
+
+    public GameEngine(String playerName) {
+        this.playerName = playerName;
+    }
 
     public void enterRoom(Room room) {
         IO.println("========== " + room.name().toUpperCase() + " ==========");
         IO.println(room.description());
     }
 
-    public void displayCurrentRoom(Room room) { //combines displaying the room and launching the gameplay menu.
+    public void displayCurrentRoom(Room room) {
         enterRoom(room);
 
+        Room nextRoom = world.getNextRoom(room);
+        String nextRoomName = nextRoom != null
+                ? nextRoom.name()
+                : "The end";
+
         GameplayMenu gameplayMenu = new GameplayMenu();
-        gameplayMenu.runMenu();
+        gameplayMenu.runMenu(nextRoomName);
     }
 
     public void startGame() {
-        displayCurrentRoom( //displays room and launches gameplay menu
-                world.getStartingRoom()); //retrieves the Office room.
+        currentRoom = world.getStartingRoom();
+        displayCurrentRoom(currentRoom);
     }
 }
