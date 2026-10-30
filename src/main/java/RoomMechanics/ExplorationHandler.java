@@ -52,6 +52,10 @@ public class ExplorationHandler {
 
                     String choice = IO.readln();
 
+                    if (choice == null) {
+                        return;
+                    }
+
                     switch (choice) {
 
                         case "1":
@@ -162,8 +166,15 @@ public class ExplorationHandler {
                                 + "from their warped face.");
                 IO.println("You start hearing zombies outside.");
                 break;
+
+            case GET_IN_CAR:
+                IO.println(
+                        "You unlock the car and climb inside. The engine starts "
+                                + "after a few attempts. You glance at the house one "
+                                + "last time before driving away.");
+                IO.println("You survived. But at what cost?");
+                break;
         }
     }
 }
-
 
