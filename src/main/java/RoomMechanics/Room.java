@@ -1,4 +1,5 @@
 package RoomMechanics;
+
 import java.util.List;
 
 public record Room(
@@ -8,4 +9,7 @@ public record Room(
         List<ExplorationOption> explorationOptions,
         String nextRoomId
 ) {
+    public Room {
+        explorationOptions = List.copyOf(explorationOptions);
+    }
 }
