@@ -9,7 +9,7 @@ public class GameEngine {
     private final World world = new World();
     private final ExplorationHandler explorationHandler = new ExplorationHandler();
     private final GameplayMenu gameplayMenu = new GameplayMenu();
-    private String playerName;
+    private final String playerName;
     private Room currentRoom;
 
     public GameEngine(String playerName) {
@@ -42,6 +42,10 @@ public class GameEngine {
 
         while (gameRunning) {
             String choice = getPlayerChoice();
+            if (choice == null || choice.isBlank()) {
+                IO.println("Please select an option");
+                continue;
+            }
 
             switch (choice) {
 
@@ -49,13 +53,26 @@ public class GameEngine {
                     exploreCurrentRoom();
                     break;
 
-                case "5": //moves player to next room
-                    currentRoom = world.getNextRoom(currentRoom);
+                case "2":
+                    IO.println("Inventory is not available yet.");
+                    break;
 
-                    if (currentRoom == null) {
+                case "3":
+                    IO.println("Character status is not available yet.");
+                    break;
+
+                case "4":
+                    IO.println("Save functionality is not available yet.");
+                    break;
+
+                case "5": //moves player to next room
+                    Room nextRoom = world.getNextRoom(currentRoom);
+
+                    if (nextRoom == null) {
                         IO.println("You have reached the end of the game.");
                         gameRunning = false;
                     } else {
+                        currentRoom = nextRoom;
                         displayCurrentRoom(currentRoom);
                     }
                     break;
@@ -66,14 +83,23 @@ public class GameEngine {
                     break;
 
                 default:
-                    IO.println("That option isn't implemented yet. Try again.");
+                    IO.println("Invalid option. Please choose a number between 1 and 6.");
             }
         }
     }
 
     private void exploreCurrentRoom() {
         var options = currentRoom.explorationOptions();
+        if (options.isEmpty()) {
+            IO.println("There is nothing to explore here.");
+            return;
+        }
+
         String choice = gameplayMenu.runExplorationMenu(options);
+        if (choice == null || choice.isBlank()) {
+            IO.println("Please select an option.");
+            return;
+        }
 
         try {
             int selectedOption = Integer.parseInt(choice) - 1; //converts the player's input from a String into an integer.
