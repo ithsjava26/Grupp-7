@@ -1,4 +1,4 @@
-package Game;
+package game;
 
 public class GameUtils {
     public static void pauseForUser() {

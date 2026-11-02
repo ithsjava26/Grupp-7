@@ -1,4 +1,4 @@
-package Game;
+package game;
 
 import RoomMechanics.ExplorationHandler;
 import RoomMechanics.Room;
