@@ -1,6 +1,6 @@
 package Game;
 
-import RoomMechanics.ExplorationOption;
+import roomMechanics.ExplorationOption;
 import java.util.List;
 
 public class GameplayMenu {

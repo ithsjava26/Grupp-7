@@ -1,4 +1,4 @@
-package RoomMechanics;
+package roomMechanics;
 
 public class ConsoleColors {
 

@@ -1,8 +1,8 @@
 package Game;
 
-import RoomMechanics.ExplorationHandler;
-import RoomMechanics.Room;
-import RoomMechanics.World;
+import roomMechanics.ExplorationHandler;
+import roomMechanics.Room;
+import roomMechanics.World;
 
 public class GameEngine {
 

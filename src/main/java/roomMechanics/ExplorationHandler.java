@@ -1,5 +1,5 @@
 
-package RoomMechanics;
+package roomMechanics;
 
 public class ExplorationHandler {
 
