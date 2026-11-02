@@ -1,5 +1,8 @@
 package Game;
 
+import RoomMechanics.ExplorationOption;
+import java.util.List;
+
 public class GameplayMenu {
 
     public void displayMenu(String nextRoomName) {
@@ -18,6 +21,19 @@ public class GameplayMenu {
 
     public String runMenu(String nextRoomName) {
         displayMenu(nextRoomName);
+        return IO.readln();
+    }
+
+    public String runExplorationMenu(List<ExplorationOption> options) {
+        IO.println();
+
+        for (int i = 0; i < options.size(); i++) {
+            IO.println((i + 1) + ". " + options.get(i).displayName());
+        }
+
+        IO.println();
+        IO.print("Choose an option: ");
+
         return IO.readln();
     }
 }
