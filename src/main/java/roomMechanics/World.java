@@ -86,6 +86,8 @@ public class World {
                             "Search an abandoned cop car",
                             ExplorationAction.SEARCH_POLICE_CAR,
                             false
+
+                            //TODO put glock 19 in player inventory
                     ),
                     new ExplorationOption(
                             "Inspect the corpse",
