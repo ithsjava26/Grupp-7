@@ -12,9 +12,9 @@ public class GameplayMenu {
         IO.println("1. Explore");
         IO.println("2. Inventory");
         IO.println("3. View character status");
-        IO.println("4. Save Game");
-        IO.println("5. Continue to " + nextRoomName);
-        IO.println("6. Return to Main Menu");
+        IO.println("4. Continue to " + nextRoomName);
+        IO.println("5. Save game");
+        IO.println("0. Return to Main Menu");
         IO.println();
         IO.print("Choose an option: ");
     }
@@ -31,6 +31,7 @@ public class GameplayMenu {
             IO.println((i + 1) + ". " + options.get(i).displayName());
         }
 
+        IO.println("0. Go back");
         IO.println();
         IO.print("Choose an option: ");
 

@@ -18,6 +18,7 @@ public class GameEngine {
 
     public void enterRoom(Room room) { //Prints the room heading and description.
         IO.println("========== " + room.name().toUpperCase() + " ==========");
+        IO.println();
         IO.println(room.description());
     }
 
@@ -88,32 +89,48 @@ public class GameEngine {
         }
     }
 
+
     private void exploreCurrentRoom() {
         var options = currentRoom.explorationOptions();
+
         if (options.isEmpty()) {
             IO.println("There is nothing to explore here.");
+            GameUtils.pauseForUser();
             return;
         }
 
-        String choice = gameplayMenu.runExplorationMenu(options);
-        if (choice == null || choice.isBlank()) {
-            IO.println("Please select an option.");
-            return;
-        }
+        while (true) {
+            String choice = gameplayMenu.runExplorationMenu(options);
 
-        try {
-            int selectedOption = Integer.parseInt(choice) - 1; //converts the player's input from a String into an integer.
+            if (choice == null || choice.isBlank()) {
+                IO.println("Please select an option.");
+                continue;
+            }
 
-            if (selectedOption < 0 || selectedOption >= options.size()) {
-                IO.println("Invalid option. Please try again.");
+            if (choice.trim().equals("0")) {
                 return;
             }
 
-            var selectedExploration = options.get(selectedOption); //retrieves the chosen ExplorationOption.
-            explorationHandler.handleExploration(selectedExploration.action(), playerName); //executes the corresponding narrative/interaction.
+            try {
+                int selectedOption = Integer.parseInt(choice.trim()) - 1;
 
-        } catch (NumberFormatException e) {
-            IO.println("Please enter a number.");
+                if (selectedOption < 0 || selectedOption >= options.size()) {
+                    IO.println("Invalid option. Please try again.");
+                    continue;
+                }
+
+                var selectedExploration = options.get(selectedOption);
+
+                explorationHandler.handleExploration(
+                        selectedExploration.action(),
+                        playerName
+                );
+
+                GameUtils.pauseForUser();
+
+            } catch (NumberFormatException e) {
+                IO.println("Please enter a number.");
+            }
         }
     }
 }
