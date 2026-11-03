@@ -1,5 +1,8 @@
 
+
 package roomMechanics;
+
+import game.GameUtils;
 
 public class ExplorationHandler {
 
@@ -8,7 +11,7 @@ public class ExplorationHandler {
         switch (action) {
 
             case LOOK_OUT_WINDOW:
-                IO.println(
+                GameUtils.printNarrative(
                         "The office is several floors above street level. Below, cars "
                                 + "are abandoned in the middle of the road. People are running, "
                                 + "some stumbling, others chasing them. You notice emergency "
@@ -16,11 +19,11 @@ public class ExplorationHandler {
                 break;
 
             case LOOK_AT_PHONE:
-                IO.println("Damn, no service");
+                GameUtils.printNarrative("Damn, no service");
                 break;
 
             case TURN_ON_RADIO:
-                IO.println(
+                GameUtils.printNarrative(
                         "An emergency message is broadcasting. The message is "
                                 + "fragmented, but you catch references to violent incidents "
                                 + "and instructions to avoid contact with anyone displaying "
@@ -28,7 +31,7 @@ public class ExplorationHandler {
                 break;
 
             case SEARCH_DESKS:
-                IO.println(
+                GameUtils.printNarrative(
                         "You search through the cluttered desks. Most contain "
                                 + "ordinary office supplies, but you grab whatever could "
                                 + "be useful.");
@@ -37,7 +40,7 @@ public class ExplorationHandler {
                 break;
 
             case TALK_TO_COWORKER:
-                IO.println(
+                GameUtils.printDialogue(
                         "Oh my god, " + playerName + "! I couldn't get you to wake up, "
                                 + "so I just left you. I thought you were one of them!\n"
                                 + "Things went completely insane downstairs. People were "
@@ -59,7 +62,7 @@ public class ExplorationHandler {
                     switch (choice) {
 
                         case "1":
-                            IO.println(
+                            GameUtils.printDialogue(
                                     "I...They said it's something in the water supply. "
                                             + "Some kind of contamination. There's talk of "
                                             + "biological warfare. Idk man. People just started "
@@ -68,7 +71,7 @@ public class ExplorationHandler {
                             break;
 
                         case "2":
-                            IO.println(
+                            GameUtils.printDialogue(
                                     "A zombie, dude. Face all fucked up, super strength... "
                                             + "I saw Maggie tearing our bosses arm right off, "
                                             + "before she jumped out the window. Can't say "
@@ -76,7 +79,7 @@ public class ExplorationHandler {
                             break;
 
                         case "3":
-                            IO.println(
+                            GameUtils.printDialogue(
                                     "Oh this? I grabbed the fire axe for safety but "
                                             + "honestly man you'll need it more than me if "
                                             + "you're heading outside. Im gonna barricade "
@@ -86,24 +89,24 @@ public class ExplorationHandler {
                             break;
 
                         case "4":
-                            IO.println(
+                            GameUtils.printNarrative(
                                     "You give your co-worker a final nod as you head out.");
                             return;
 
                         default:
-                            IO.println("Invalid option. Try again.");
+                            GameUtils.printSystemMessage("Invalid option. Try again.");
                     }
                 }
 
             case OBSERVE_FIGURES:
-                IO.println(
+                GameUtils.printNarrative(
                         "You notice several figures moving strangely in the "
                                 + "distance. One stumbles into a parked car, while another "
                                 + "crawls along the pavement. Something is clearly wrong.");
                 break;
 
             case INSPECT_ABANDONED_CAR:
-                IO.println(
+                GameUtils.printNarrative(
                         "You see a car with its doors open, there's blood smeared "
                                 + "on the shattered wind shield. You search it for anything "
                                 + "useful");
@@ -112,14 +115,14 @@ public class ExplorationHandler {
                 break;
 
             case INSPECT_CORPSE:
-                IO.println(
+                GameUtils.printNarrative(
                         "You approach the body cautiously. Its clothes are torn, "
                                 + "and deep bite marks cover its arms and neck. Whatever "
                                 + "happened here, it wasn't an ordinary attack.");
                 break;
 
             case SEARCH_POLICE_CAR:
-                IO.println(
+                GameUtils.printNarrative(
                         "You approach the abandoned police car. The driver's door "
                                 + "is open, and the officer's belongings are scattered "
                                 + "across the seat. You search the vehicle and find a firearm.");
@@ -128,7 +131,7 @@ public class ExplorationHandler {
                 break;
 
             case SEARCH_BACKPACK:
-                IO.println(
+                GameUtils.printNarrative(
                         "You spot an abandoned backpack near a park bench. "
                                 + "Inside, you find some snacks, a water bottle and a "
                                 + "motorcycle jacket");
@@ -137,44 +140,45 @@ public class ExplorationHandler {
                 break;
 
             case SEARCH_GROUND_FLOOR:
-                IO.println(
+                GameUtils.printNarrative(
                         "You search the ground floor. A chair lies overturned "
                                 + "in the hallway. You're too stressed to find anything "
                                 + "useful.");
                 break;
 
             case SEARCH_FOR_KEYS:
-                IO.println(
+                GameUtils.printNarrative(
                         "You search the bedroom and eventually find the car keys.");
 
                 // TODO: Add car keys to player's inventory
                 break;
 
             case CALL_FOR_PARTNER:
-                IO.println(
+                GameUtils.printNarrative(
                         "You call out your partner's name, hoping for an answer. "
                                 + "The house remains silent. Then, somewhere downstairs, "
                                 + "you hear a faint noise. Could it be?");
                 break;
 
             case SEARCH_PARTNER:
-                IO.println(
+                GameUtils.printNarrative(
                         "You approach the body and kneel beside them, unable to "
                                 + "process what you're seeing.");
-                IO.println(
+                GameUtils.printDialogue(
                         "\"I'm so, so sorry,\" you whisper as you wipe the hair "
                                 + "from their warped face.");
-                IO.println("You start hearing zombies outside.");
+                GameUtils.printWarning("You start hearing zombies outside.");
                 break;
 
             case GET_IN_CAR:
-                IO.println(
+                GameUtils.printNarrative(
                         "You unlock the car and climb inside. The engine starts "
                                 + "after a few attempts. You glance at the house one "
                                 + "last time before driving away.");
-                IO.println("You survived. But at what cost?");
+                GameUtils.printNarrative("You survived. But at what cost?");
                 break;
         }
     }
 }
+
 

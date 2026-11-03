@@ -1,5 +1,6 @@
 package game;
 
+import roomMechanics.ConsoleColors;
 import roomMechanics.ExplorationHandler;
 import roomMechanics.Room;
 import roomMechanics.World;
@@ -17,9 +18,12 @@ public class GameEngine {
     }
 
     public void enterRoom(Room room) { //Prints the room heading and description.
-        IO.println("========== " + room.name().toUpperCase() + " ==========");
+        IO.println(ConsoleColors.YELLOW + "========== " + room.name().toUpperCase()
+                + " ==========" + ConsoleColors.RESET);
         IO.println();
-        IO.println(room.description());
+        GameUtils.printNarrative(room.description());
+
+        GameUtils.pauseAfterRoom();
     }
 
     public void displayCurrentRoom(Room room) {//Calls enterRoom() when displaying a room.
@@ -56,17 +60,16 @@ public class GameEngine {
 
                 case "2":
                     IO.println("Inventory is not available yet.");
+                    GameUtils.pauseForUser();
                     break;
 
                 case "3":
                     IO.println("Character status is not available yet.");
+                    GameUtils.pauseForUser();
                     break;
 
                 case "4":
-                    IO.println("Save functionality is not available yet.");
-                    break;
-
-                case "5": //moves player to next room
+                    //moves player to next room
                     Room nextRoom = world.getNextRoom(currentRoom);
 
                     if (nextRoom == null) {
@@ -76,6 +79,11 @@ public class GameEngine {
                         currentRoom = nextRoom;
                         displayCurrentRoom(currentRoom);
                     }
+                    break;
+
+                case "5":
+                    IO.println("Save functionality is not available yet.");
+                    GameUtils.pauseForUser();
                     break;
 
                 case "6": //exits gameplay loop

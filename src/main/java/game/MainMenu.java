@@ -1,11 +1,13 @@
 package game;
 
+import roomMechanics.ConsoleColors;
+
 public class MainMenu {
 
     public void displayMenu() {
-        IO.println("==============================");
-        IO.println("       THE LAST SHIFT");
-        IO.println("==============================");
+        IO.println(ConsoleColors.GREY + "==============================" + ConsoleColors.RESET);
+        IO.println(ConsoleColors.RED + "       THE LAST SHIFT" + ConsoleColors.RESET);
+        IO.println(ConsoleColors.GREY + "==============================" + ConsoleColors.RESET);
         IO.println();
         IO.println("1. Start New Game");
         IO.println("2. Load Game");
@@ -64,5 +66,3 @@ public class MainMenu {
         return playerName;
     }
 }
-
-
