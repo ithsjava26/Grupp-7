@@ -1,5 +1,7 @@
 package game;
 
+import combat.Hero;
+import combat.MeleeAttack;
 import roomMechanics.*;
 
 import java.util.HashSet;
@@ -11,11 +13,21 @@ public class GameEngine {
     private final ExplorationHandler explorationHandler = new ExplorationHandler();
     private final GameplayMenu gameplayMenu = new GameplayMenu();
     private final String playerName;
+    private final Hero player;
     private Room currentRoom;
     private final Set<ExplorationAction> completedActions = new HashSet<>();
 
     public GameEngine(String playerName) {
         this.playerName = playerName;
+
+        this.player = new Hero(
+                playerName,
+                100,
+                100,
+                15,
+                5,
+                new MeleeAttack()
+        );
     }
 
     public void enterRoom(Room room) { //Prints the room heading and description.
@@ -68,8 +80,7 @@ public class GameEngine {
                     break;
 
                 case "3":
-                    IO.println("Character status is not available yet.");
-                    GameUtils.pauseForUser();
+                    displayCharacterStatus();
                     break;
 
                 case "4":
@@ -153,5 +164,20 @@ public class GameEngine {
                 IO.println("Please enter a number.");
             }
         }
+    }
+
+    private void displayCharacterStatus() {
+        IO.println();
+        IO.println(ConsoleColors.YELLOW + "========== CHARACTER STATUS ==========" + ConsoleColors.RESET);
+
+        IO.println(ConsoleColors.YELLOW + "Name: " + ConsoleColors.RESET + player.getName());
+        IO.println(ConsoleColors.YELLOW + "Health: " + ConsoleColors.RESET
+                + player.getHealth() + "/" + player.getMaxHealth());
+        IO.println(ConsoleColors.YELLOW + "Attack: " + ConsoleColors.RESET + player.getAttack());
+        IO.println(ConsoleColors.YELLOW + "Defence: " + ConsoleColors.RESET + player.getDefense());
+
+        IO.println(ConsoleColors.YELLOW + "======================================" + ConsoleColors.RESET);
+
+        GameUtils.pauseForUser();
     }
 }
