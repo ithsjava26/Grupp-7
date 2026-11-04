@@ -86,7 +86,7 @@ public class GameEngine {
                     GameUtils.pauseForUser();
                     break;
 
-                case "6": //exits gameplay loop
+                case "0": //exits gameplay loop
                     IO.println("Returning to main menu...");
                     gameRunning = false;
                     break;
