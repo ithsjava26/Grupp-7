@@ -32,6 +32,7 @@ public class World {
                             ExplorationAction.SEARCH_DESKS,
                             false
                     )
+                    //TODO add pain killers and energy drink
             ),
             "office-hallway"
     );
@@ -48,6 +49,7 @@ public class World {
                             ExplorationAction.TALK_TO_COWORKER,
                             false
                     )
+                    //TODO add fire axe
             ),
             "street-1"
     );
@@ -68,7 +70,9 @@ public class World {
                             "Search an abandoned car",
                             ExplorationAction.INSPECT_ABANDONED_CAR,
                             false
+
                     )
+                    //TODO add bandages
             ),
             "street-2"
     );
@@ -87,7 +91,7 @@ public class World {
                             ExplorationAction.SEARCH_POLICE_CAR,
                             false
 
-                            //TODO put glock 19 in player inventory
+                            //TODO put glock 19 and medical kit in player inventory
                     ),
                     new ExplorationOption(
                             "Inspect the corpse",
