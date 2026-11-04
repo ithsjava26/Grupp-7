@@ -1,9 +1,9 @@
 package game;
 
-import roomMechanics.ConsoleColors;
-import roomMechanics.ExplorationHandler;
-import roomMechanics.Room;
-import roomMechanics.World;
+import roomMechanics.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class GameEngine {
 
@@ -12,6 +12,7 @@ public class GameEngine {
     private final GameplayMenu gameplayMenu = new GameplayMenu();
     private final String playerName;
     private Room currentRoom;
+    private final Set<ExplorationAction> completedActions = new HashSet<>();
 
     public GameEngine(String playerName) {
         this.playerName = playerName;
@@ -47,10 +48,13 @@ public class GameEngine {
 
         while (gameRunning) {
             String choice = getPlayerChoice();
+
             if (choice == null || choice.isBlank()) {
-                IO.println("Please select an option");
+                IO.println("Please select an option.");
                 continue;
             }
+
+            choice = choice.trim();
 
             switch (choice) {
 
@@ -92,22 +96,28 @@ public class GameEngine {
                     break;
 
                 default:
-                    IO.println("Invalid option. Please choose a number between 1 and 6.");
+                    IO.println("Invalid option. Please try again.");
             }
         }
     }
 
 
     private void exploreCurrentRoom() {
-        var options = currentRoom.explorationOptions();
-
-        if (options.isEmpty()) {
-            IO.println("There is nothing to explore here.");
-            GameUtils.pauseForUser();
-            return;
-        }
 
         while (true) {
+
+            // Rebuild the available options each time the menu is displayed.
+            var options = currentRoom.explorationOptions().stream()
+                    .filter(option -> option.repeatable()
+                            || !completedActions.contains(option.action()))
+                    .toList();
+
+            if (options.isEmpty()) {
+                IO.println("There is nothing to explore here.");
+                GameUtils.pauseForUser();
+                return;
+            }
+
             String choice = gameplayMenu.runExplorationMenu(options);
 
             if (choice == null || choice.isBlank()) {
@@ -131,8 +141,11 @@ public class GameEngine {
 
                 explorationHandler.handleExploration(
                         selectedExploration.action(),
-                        playerName
-                );
+                        playerName);
+
+                if (!selectedExploration.repeatable()) {
+                    completedActions.add(selectedExploration.action());
+                }
 
                 GameUtils.pauseForUser();
 

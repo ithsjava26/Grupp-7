@@ -19,7 +19,7 @@ public class ExplorationHandler {
                 break;
 
             case LOOK_AT_PHONE:
-                GameUtils.printNarrative("Damn, no service");
+                GameUtils.printDialogue("Damn, no service");
                 break;
 
             case TURN_ON_RADIO:

@@ -48,8 +48,10 @@ public class GameUtils {
 
     public static void pauseForUser() {
         IO.println();
-        IO.print("Press ENTER to continue.");
+        IO.print("Press ENTER to continue...");
         IO.readln();
+        IO.println();
+        IO.println();
     }
 
     public static void pauseForCombat() {
