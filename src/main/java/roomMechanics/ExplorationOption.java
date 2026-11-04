@@ -1,4 +1,4 @@
-package RoomMechanics;
+package roomMechanics;
 
 public record ExplorationOption(
         String displayName, // the text displayed to the player
