@@ -22,13 +22,22 @@ public abstract class GameCharacter {
             throw new IllegalArgumentException("maxHealth must be greater than 0");
         }
         if (attackStrategy == null) {
-            throw new IllegalArgumentException("atatckStrategy can not be null");
+            throw new IllegalArgumentException("attackStrategy can not be null");
         }
         this.name = name;
         this.maxHealth = maxHealth;
         this.attack = attack;
         this.defense = defense;
         this.health = Math.max(0, Math.min(health, maxHealth));
+        this.attackStrategy = attackStrategy;
+    }
+    public AttackStrategy getAttackStrategy() {
+        return attackStrategy;
+    }
+    public void setAttackStrategy(AttackStrategy attackStrategy) {
+        if(attackStrategy == null) {
+            throw new IllegalArgumentException("attackStrategy can not be null");
+        }
         this.attackStrategy = attackStrategy;
     }
 
@@ -52,16 +61,6 @@ public abstract class GameCharacter {
         return health > 0;
     }
 
-
-    public AttackStrategy getAttackStrategy() {
-        return attackStrategy;
-    }
-    public void setAttackStrategy(AttackStrategy attackStrategy) {
-        if (attackStrategy == null) {
-            throw new IllegalArgumentException("attackStrategy can not be null");
-        }
-        this.attackStrategy = attackStrategy;
-    }
     public void takeDamage(int amount) {
      if (amount < 0) {
          throw new IllegalArgumentException("Damage can not be negative");
