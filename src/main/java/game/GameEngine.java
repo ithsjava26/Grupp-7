@@ -1,9 +1,9 @@
 package game;
 
-import combat.Hero;
-import combat.MeleeAttack;
+import combat.*;
 import roomMechanics.*;
-
+import combat.CombatResult;
+import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +16,9 @@ public class GameEngine {
     private final Hero player;
     private Room currentRoom;
     private final Set<ExplorationAction> completedActions = new HashSet<>();
+    private final CombatManager combatManager = new CombatManager();
+    private final Set<String> completedEncounters = new HashSet<>();
+    private boolean gameOver = false;
 
     public GameEngine(String playerName) {
         this.playerName = playerName;
@@ -39,8 +42,15 @@ public class GameEngine {
         GameUtils.pauseAfterRoom();
     }
 
-    public void displayCurrentRoom(Room room) {//Calls enterRoom() when displaying a room.
+    public void displayCurrentRoom(Room room) {
         enterRoom(room);
+
+        if (!startEncounter(room)) {
+            IO.println();
+            GameUtils.printWarning("GAME OVER");
+            IO.println("Returning to main menu...");
+            gameOver = true;
+        }
     }
 
     public String getPlayerChoice() {  //	Displays the menu and returns the player's selection.
@@ -58,7 +68,7 @@ public class GameEngine {
 
         boolean gameRunning = true;
 
-        while (gameRunning) {
+        while (gameRunning && !gameOver) {
             String choice = getPlayerChoice();
 
             if (choice == null || choice.isBlank()) {
@@ -184,4 +194,53 @@ public class GameEngine {
 
         GameUtils.pauseForUser();
     }
+
+    private List<Enemy> createEnemiesForRoom(Room room) {
+        return switch (room.id()) {
+            case "street-2" -> List.of(
+                    new Enemy("Infected Civilian", 35, 35, 8, 2, new MeleeAttack())
+            );
+
+            case "park-2" -> List.of(
+                    new Enemy("Infected Runner", 35, 35, 9, 2, new MeleeAttack()),
+                    new Enemy("Infected Heavy", 50, 50, 11, 4, new HeavyAttack())
+            );
+
+            case "garage" -> List.of(
+                    new Enemy("Your Partner", 70, 70, 12, 4, new HeavyAttack())
+            );
+
+            default -> List.of();
+        };
+    }
+    private boolean startEncounter(Room room) {
+        if (completedEncounters.contains(room.id())) {
+            return true;
+        }
+
+        List<Enemy> enemies = createEnemiesForRoom(room);
+
+        if (enemies.isEmpty()) {
+            return true;
+        }
+
+        IO.println();
+        IO.println(ConsoleColors.RED + "!!! ENEMY ENCOUNTER !!!" + ConsoleColors.RESET);
+        GameUtils.pauseForCombat();
+
+        CombatResult result = combatManager.startCombat(player, enemies);
+
+        completedEncounters.add(room.id());
+
+        if (result == CombatResult.DEFEAT) {
+            GameUtils.printWarning("You have been overwhelmed. Your journey ends here.");
+            return false;
+        }
+
+        GameUtils.printSystemMessage("The area is clear. You can move on.");
+        GameUtils.pauseForUser();
+
+        return true;
+    }
+
 }

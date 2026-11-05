@@ -1,8 +1,11 @@
 
 package roomMechanics;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import combat.CombatManager;
 public class World {
 
     private final Room office = new Room(
@@ -190,6 +193,8 @@ public class World {
     public Room getStartingRoom() {
         return office;
     }
+    private final CombatManager combatManager = new CombatManager();
+    private final Set<String> completedEncounters = new HashSet<>();
 
     public Room getRoomById(String id) {
         if (office.id().equals(id)) {
