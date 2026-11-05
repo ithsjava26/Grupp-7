@@ -31,8 +31,8 @@ public class GameEngine {
     }
 
     public void enterRoom(Room room) { //Prints the room heading and description.
-        IO.println(ConsoleColors.YELLOW + "========== " + room.name().toUpperCase()
-                + " ==========" + ConsoleColors.RESET);
+        IO.println(ConsoleColors.YELLOW + "=========== " + room.name().toUpperCase()
+                + " ===========" + ConsoleColors.RESET);
         IO.println();
         GameUtils.printNarrative(room.description());
 
@@ -159,6 +159,10 @@ public class GameEngine {
                 }
 
                 GameUtils.pauseForUser();
+
+                if (selectedExploration.action() == ExplorationAction.TALK_TO_COWORKER) {
+                    return;
+                }
 
             } catch (NumberFormatException e) {
                 IO.println("Please enter a number.");

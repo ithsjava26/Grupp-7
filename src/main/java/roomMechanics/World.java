@@ -56,9 +56,9 @@ public class World {
 
     private final Room street1 = new Room(
             "street-1",
-            "Street 1",
+            "Baker Street",
             "Outside, the city is barely recognizable. Cars have been abandoned at odd angles, " +
-                    "alarms echo between buildings, and distant figures move through the smoke. " +
+                    "alarms echo between buildings, and distant figures move through the smoke " +
                     "...Is that gunshots? ",
             List.of(
                     new ExplorationOption(
@@ -79,9 +79,9 @@ public class World {
 
     private final Room street2 = new Room(
             "street-2",
-            "Street 2",
-            "The further you walk, the louder the chaos becomes. A bus blocks part of the road, " +
-                    "its windows shattered. You trip on some debris and suddenly something starts " +
+            "Murphy Street",
+            "A bus blocks part of the road, its windows shattered. " +
+                    " You trip on some debris and suddenly something starts " +
                     "rattling around inside the bus. Before you have time to react you're face-to-face " +
                     "with a creature you can only describe as a zombie",
             // TODO FIRST COMBAT HERE!!! then trigger exploration options after combat
@@ -104,10 +104,10 @@ public class World {
 
     private final Room park1 = new Room(
             "park-1",
-            "Park 1",
+            "Park entrance",
             "You reach a park between the buildings - your shortcut home. A discarded backpack lies " +
-                    "beside the path, and the bushes rustle somewhere out of sight. You know you're " +
-                    "almost there but you can't shake the feeling that you're being watched.",
+                    "beside the path. You know you're almost there... " +
+                    " but you can't shake the feeling that you're being watched.",
             List.of(
                     new ExplorationOption(
                             "Search the backpack",
@@ -120,7 +120,7 @@ public class World {
 
     private final Room park2 = new Room(
             "park-2",
-            "Park 2",
+            "Griffin Park",
             " Beyond the trees, you can see the next street leading towards a residential area... " +
                     "Home. Just as you're about to start running towards your goal, you hear a " +
                     "gurgling scream behind you. You turn around.",

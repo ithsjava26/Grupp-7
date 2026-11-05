@@ -32,9 +32,8 @@ public class ExplorationHandler {
 
             case SEARCH_DESKS:
                 GameUtils.printNarrative(
-                        "You search through the cluttered desks. Most contain "
-                                + "ordinary office supplies, but you grab whatever could "
-                                + "be useful.");
+                        "You search through the cluttered desks"
+                                + " and grab whatever could be useful.");
 
                 // TODO: Add items: pain killers and energy drink
                 break;
@@ -73,7 +72,7 @@ public class ExplorationHandler {
                         case "2":
                             GameUtils.printDialogue(
                                     "A zombie, dude. Face all fucked up, super strength... "
-                                            + "I saw Maggie tearing our bosses arm right off, "
+                                            + "I saw Maggie tear our bosses arm right off, "
                                             + "before she jumped out the window. Can't say "
                                             + "I've never thought of that *laughs*");
                             break;
@@ -111,7 +110,7 @@ public class ExplorationHandler {
                                 + "on the shattered wind shield. You search it for anything "
                                 + "useful");
 
-                // TODO: Add an emergency medical kit to player inventory
+                // TODO: Add bandages to player inventory
                 break;
 
             case INSPECT_CORPSE:
@@ -127,12 +126,12 @@ public class ExplorationHandler {
                                 + "is open, and the officer's belongings are scattered "
                                 + "across the seat. You search the vehicle and find a firearm.");
 
-                // TODO: Add firearm and ammo to player inventory
+                // TODO: Add glock 19 and medkit to player inventory
                 break;
 
             case SEARCH_BACKPACK:
                 GameUtils.printNarrative(
-                        "You spot an abandoned backpack near a park bench. "
+                        "You open the backpack. "
                                 + "Inside, you find some snacks, a water bottle and a "
                                 + "motorcycle jacket");
 
