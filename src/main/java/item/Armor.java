@@ -1,4 +1,4 @@
-package Item;
+package item;
 
 public class Armor extends Item {
     private int defenseBonus;
