@@ -3,7 +3,10 @@ package game;
 
 import audio.SoundManager;
 import combat.*;
+import inventory.ItemUsage;
+import item.*;
 import roomMechanics.*;
+
 import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
@@ -90,8 +93,7 @@ public class GameEngine {
                     break;
 
                 case "2":
-                    IO.println("Inventory is not available yet.");
-                    GameUtils.pauseForUser();
+                    viewInventory();
                     break;
 
                 case "3":
@@ -141,7 +143,7 @@ public class GameEngine {
                     .toList();
 
             if (options.isEmpty()) {
-                IO.println("There is nothing to explore here.");
+                GameUtils.printSystemMessage("There is nothing to explore here.");
                 GameUtils.pauseForUser();
                 return;
             }
@@ -153,7 +155,7 @@ public class GameEngine {
                 continue;
             }
 
-            if (choice.trim().equals("0")) {
+            if (choice.trim().equals("e")) {
                 return;
             }
 
@@ -169,7 +171,8 @@ public class GameEngine {
 
                 explorationHandler.handleExploration(
                         selectedExploration.action(),
-                        playerName);
+                        playerName,
+                        player.getInventory());
 
                 if (!selectedExploration.repeatable()) {
                     completedActions.add(selectedExploration.action());
@@ -196,6 +199,10 @@ public class GameEngine {
                 + player.getHealth() + "/" + player.getMaxHealth());
         IO.println(ConsoleColors.YELLOW + "Attack: " + ConsoleColors.RESET + player.getAttack());
         IO.println(ConsoleColors.YELLOW + "Defence: " + ConsoleColors.RESET + player.getDefense());
+        if (player.hasEnergyBoost()) {
+            IO.println(ConsoleColors.YELLOW + "[ACTIVE] Energy boost: Next attack deals double damage!"
+                    + ConsoleColors.RESET);
+        }
 
         IO.println(ConsoleColors.YELLOW + "======================================" + ConsoleColors.RESET);
 
@@ -205,7 +212,7 @@ public class GameEngine {
     private List<Enemy> createEnemiesForRoom(Room room) {
         return switch (room.id()) {
             case "street-2" -> List.of(
-                    new Enemy("Infected Civilian", 35, 35, 8, 2, new MeleeAttack())
+                    new Enemy("Infected Civilian", 55, 55, 11, 3, new MeleeAttack())
             );
 
             case "park-2" -> List.of(
@@ -214,7 +221,7 @@ public class GameEngine {
             );
 
             case "garage" -> List.of(
-                    new Enemy("Your Partner", 70, 70, 12, 4, new HeavyAttack())
+                    new Enemy("Your Partner", 70, 70, 10, 4, new HeavyAttack())
             );
 
             default -> List.of();
@@ -259,5 +266,141 @@ public class GameEngine {
         GameUtils.pauseForUser();
 
         return true;
+    }
+
+    private void viewInventory() {
+        ItemUsage itemUsage = new ItemUsage(player.getInventory());
+
+        while (true) {
+            String choice = gameplayMenu.runInventoryMenu(player);
+
+            if (choice == null || choice.isBlank()) {
+                return;
+            }
+
+            choice = choice.trim();
+
+            if (choice.equals("0")) {
+                return;
+            }
+
+            try {
+                int itemNumber = Integer.parseInt(choice);
+
+                if (itemNumber < 1 || itemNumber > player.getInventory().getSize()) {
+                    IO.println("Invalid inventory selection.");
+                    GameUtils.pauseForUser();
+                    continue;
+                }
+
+                Item selectedItem = player.getInventory().getItem(itemNumber - 1);
+
+                handleSelectedItem(selectedItem, itemUsage);
+
+            } catch (NumberFormatException e) {
+                IO.println("Please enter a valid number.");
+                GameUtils.pauseForUser();
+            }
+        }
+    }
+    private void handleSelectedItem(Item item, ItemUsage itemUsage) {
+        while (true) {
+            IO.println();
+            IO.println(ConsoleColors.YELLOW + "=== " + item.getName().toUpperCase()
+                    + " ===" + ConsoleColors.RESET);
+            IO.println();
+            IO.println(item.getDescription());
+            IO.println();
+
+            if (item instanceof Weapon weapon) {
+                boolean equipped = player.getEquippedWeapon() == weapon;
+
+                if (equipped) {
+                    IO.println(ConsoleColors.YELLOW + "1. Unequip weapon" + ConsoleColors.RESET);
+                } else {
+                    IO.println(ConsoleColors.YELLOW + "1. Equip weapon" + ConsoleColors.RESET);
+                }
+
+            } else if (item instanceof Armor armor) {
+                boolean equipped = player.getEquippedArmor() == armor;
+
+                if (equipped) {
+                    IO.println(ConsoleColors.YELLOW + "1. Unequip armour" + ConsoleColors.RESET);
+                } else {
+                    IO.println(ConsoleColors.YELLOW + "1. Equip armour" + ConsoleColors.RESET);
+                }
+
+            } else if (item instanceof Food || item instanceof Medkit) {
+                IO.println(ConsoleColors.YELLOW + "1. Use item" + ConsoleColors.RESET);
+
+            } else {
+                IO.println("This item cannot be used or equipped.");
+            }
+
+            IO.println(ConsoleColors.YELLOW + "e. Go back" + ConsoleColors.RESET);
+            IO.println();
+            IO.print("Choose an option: ");
+
+            String choice = IO.readln();
+
+            if (choice == null || choice.isBlank() || choice.trim().equals("e")) {
+                return;
+            }
+
+            if (!choice.trim().equals("1")) {
+                IO.println("Invalid option.");
+                GameUtils.pauseForUser();
+                continue;
+            }
+
+            if (item instanceof Weapon weapon) {
+                if (player.getEquippedWeapon() == weapon) {
+                    player.unequipWeapon();
+                    IO.println("Weapon unequipped.");
+                } else {
+                    player.equipWeapon(weapon);
+                    IO.println("Weapon equipped: " + weapon.getName());
+                }
+
+                GameUtils.pauseForUser();
+                return;
+
+            } else if (item instanceof Armor armor) {
+                if (player.getEquippedArmor() == armor) {
+                    player.unequipArmor();
+                    IO.println("Armour unequipped.");
+                } else {
+                    player.equipArmor(armor);
+                    IO.println("Armour equipped: " + armor.getName());
+                }
+
+                GameUtils.pauseForUser();
+                return;
+
+            } else if (item instanceof Food || item instanceof Medkit) {
+                if (confirmItemUse(item)) {
+                    int index = player.getInventory().getItems().indexOf(item);
+                    IO.println(itemUsage.useItem(index, player));
+                }
+
+                GameUtils.pauseForUser();
+                return;
+            }
+
+            GameUtils.pauseForUser();
+            return;
+        }
+    }
+    private boolean confirmItemUse(Item item) {
+        IO.println();
+        IO.println("Do you want to consume " + item.getName() + "?");
+        IO.println(ConsoleColors.YELLOW + "1. Yes" + ConsoleColors.RESET);
+        IO.println(ConsoleColors.YELLOW + "0. No" + ConsoleColors.RESET);
+        IO.println();
+        IO.print("Choose an option: ");
+
+        String choice = IO.readln();
+
+        return choice != null && choice.trim().equals("1");
     }
 }

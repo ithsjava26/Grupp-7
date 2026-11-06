@@ -5,6 +5,6 @@ import item.Food;
 public class ProteinBar extends Food {
 
     public ProteinBar() {
-        super("Protein bar", "A small protein snack.", 10);
+        super("Protein Bar", "Permanently increases maximum HP by 10.", 10);
     }
 }

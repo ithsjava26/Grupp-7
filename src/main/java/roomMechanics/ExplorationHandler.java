@@ -1,6 +1,14 @@
 
 package roomMechanics;
 
+import inventory.Inventory;
+import item.Item;
+import medkit.*;
+import food.*;
+import weapon.Fireaxe;
+import weapon.Glock19;
+import armor.MotorcycleJacket;
+import keyitem.CarKeys;
 import game.GameUtils;
 import audio.SoundManager;
 
@@ -12,7 +20,10 @@ public class ExplorationHandler {
         this.soundManager = soundManager;
     }
 
-    public void handleExploration(ExplorationAction action, String playerName) {
+    public void handleExploration(
+            ExplorationAction action,
+            String playerName,
+            Inventory inventory) {
 
         // Play sound effects for exploration actions
         switch (action) {
@@ -29,19 +40,11 @@ public class ExplorationHandler {
                 break;
 
             case SEARCH_DESKS:
+            case INSPECT_ABANDONED_CAR:
             case SEARCH_POLICE_CAR:
             case SEARCH_BACKPACK:
             case SEARCH_GROUND_FLOOR:
                 soundManager.playEffect(SoundManager.Effect.SEARCH);
-                break;
-
-            case OBSERVE_FIGURES:
-            case CALL_FOR_PARTNER:
-                soundManager.playEffect(SoundManager.Effect.ZOMBIE_GROAN);
-                break;
-
-            case INSPECT_ABANDONED_CAR:
-                soundManager.playEffect(SoundManager.Effect.CAR_CREAK);
                 break;
 
             case SEARCH_FOR_KEYS:
@@ -84,7 +87,8 @@ public class ExplorationHandler {
                         "You search through the cluttered desks"
                                 + " and grab whatever could be useful.");
 
-                // TODO: Add items: pain killers and energy drink
+                addItemToInventory(inventory, new PainKillers());
+                addItemToInventory(inventory, new EnergiDrink());
                 break;
 
             case TALK_TO_COWORKER:
@@ -99,7 +103,7 @@ public class ExplorationHandler {
                     IO.println("1. What the hell is going on?");
                     IO.println("2. What do you mean, one of them?");
                     IO.println("3. What's with the axe?");
-                    IO.println("4. Leave");
+                    IO.println(ConsoleColors.YELLOW + "e. " + ConsoleColors.RESET + "Leave");
 
                     String choice = IO.readln();
 
@@ -136,10 +140,10 @@ public class ExplorationHandler {
                                             + "you're heading outside. Im gonna barricade "
                                             + "myself in here and wait for help. Here, take it.");
 
-                            // TODO: Add fire axe to player inventory
+                            addItemToInventory(inventory, new Fireaxe());
                             break;
 
-                        case "4":
+                        case "e":
                             GameUtils.printNarrative(
                                     "You give your co-worker a final nod as you head out.");
                             return;
@@ -162,7 +166,7 @@ public class ExplorationHandler {
                                 + "on the shattered wind shield. You search it for anything "
                                 + "useful");
 
-                // TODO: Add bandages to player inventory
+                addItemToInventory(inventory, new Bandage());
                 break;
 
             case INSPECT_CORPSE:
@@ -178,7 +182,8 @@ public class ExplorationHandler {
                                 + "is open, and the officer's belongings are scattered "
                                 + "across the seat. You search the vehicle and find a firearm.");
 
-                // TODO: Add glock 19 and medkit to player inventory
+                addItemToInventory(inventory, new Glock19());
+                addItemToInventory(inventory, new FirstAidKit());
                 break;
 
             case SEARCH_BACKPACK:
@@ -187,7 +192,9 @@ public class ExplorationHandler {
                                 + "Inside, you find some snacks, a water bottle and a "
                                 + "motorcycle jacket");
 
-                // TODO: Add items to player inventory
+                addItemToInventory(inventory, new Chips());
+                addItemToInventory(inventory, new ProteinBar());
+                addItemToInventory(inventory, new MotorcycleJacket());
                 break;
 
             case SEARCH_GROUND_FLOOR:
@@ -201,7 +208,7 @@ public class ExplorationHandler {
                 GameUtils.printNarrative(
                         "You search the bedroom and eventually find the car keys.");
 
-                // TODO: Add car keys to player's inventory
+                addItemToInventory(inventory, new CarKeys());
                 break;
 
             case CALL_FOR_PARTNER:
@@ -230,4 +237,20 @@ public class ExplorationHandler {
                 break;
         }
     }
+    private void addItemToInventory(Inventory inventory, Item item) {
+        if (inventory.addItem(item)) {
+            IO.println();
+            IO.print(ConsoleColors.YELLOW + "[SYSTEM] " + ConsoleColors.RESET);
+            IO.println(item.getName() + " added to inventory.");
+        } else {
+            IO.println();
+            IO.print(ConsoleColors.YELLOW + "[SYSTEM] " + ConsoleColors.RESET);
+            IO.println("Inventory full! " + item.getName()
+                    + " could not be picked up.");
+        }
+
+        IO.println();
+    }
+
 }
+
