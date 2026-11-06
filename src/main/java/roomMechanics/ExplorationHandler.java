@@ -1,13 +1,62 @@
 
-
 package roomMechanics;
 
 import game.GameUtils;
+import audio.SoundManager;
 
 public class ExplorationHandler {
 
+    private final SoundManager soundManager;
+
+    public ExplorationHandler(SoundManager soundManager) {
+        this.soundManager = soundManager;
+    }
+
     public void handleExploration(ExplorationAction action, String playerName) {
 
+        // Play sound effects for exploration actions
+        switch (action) {
+            case LOOK_AT_PHONE:
+                soundManager.playEffect(SoundManager.Effect.PHONE_ERROR);
+                break;
+
+            case TURN_ON_RADIO:
+                soundManager.playEffect(SoundManager.Effect.RADIO_STATIC);
+                break;
+
+            case TALK_TO_COWORKER:
+                soundManager.playEffect(SoundManager.Effect.DIALOGUE);
+                break;
+
+            case SEARCH_DESKS:
+            case SEARCH_POLICE_CAR:
+            case SEARCH_BACKPACK:
+            case SEARCH_GROUND_FLOOR:
+                soundManager.playEffect(SoundManager.Effect.SEARCH);
+                break;
+
+            case OBSERVE_FIGURES:
+            case CALL_FOR_PARTNER:
+                soundManager.playEffect(SoundManager.Effect.ZOMBIE_GROAN);
+                break;
+
+            case INSPECT_ABANDONED_CAR:
+                soundManager.playEffect(SoundManager.Effect.CAR_CREAK);
+                break;
+
+            case SEARCH_FOR_KEYS:
+                soundManager.playEffect(SoundManager.Effect.KEYS);
+                break;
+
+            case GET_IN_CAR:
+                soundManager.playEffect(SoundManager.Effect.ENGINE_START);
+                break;
+
+            default:
+                break;
+        }
+
+        // Existing exploration narratives
         switch (action) {
 
             case LOOK_OUT_WINDOW:
@@ -32,9 +81,8 @@ public class ExplorationHandler {
 
             case SEARCH_DESKS:
                 GameUtils.printNarrative(
-                        "You search through the cluttered desks. Most contain "
-                                + "ordinary office supplies, but you grab whatever could "
-                                + "be useful.");
+                        "You search through the cluttered desks"
+                                + " and grab whatever could be useful.");
 
                 // TODO: Add items: pain killers and energy drink
                 break;
@@ -62,6 +110,7 @@ public class ExplorationHandler {
                     switch (choice) {
 
                         case "1":
+                            soundManager.playEffect(SoundManager.Effect.DIALOGUE);
                             GameUtils.printDialogue(
                                     "I...They said it's something in the water supply. "
                                             + "Some kind of contamination. There's talk of "
@@ -71,14 +120,16 @@ public class ExplorationHandler {
                             break;
 
                         case "2":
+                            soundManager.playEffect(SoundManager.Effect.DIALOGUE);
                             GameUtils.printDialogue(
                                     "A zombie, dude. Face all fucked up, super strength... "
-                                            + "I saw Maggie tearing our bosses arm right off, "
+                                            + "I saw Maggie tear our bosses arm right off, "
                                             + "before she jumped out the window. Can't say "
                                             + "I've never thought of that *laughs*");
                             break;
 
                         case "3":
+                            soundManager.playEffect(SoundManager.Effect.DIALOGUE);
                             GameUtils.printDialogue(
                                     "Oh this? I grabbed the fire axe for safety but "
                                             + "honestly man you'll need it more than me if "
@@ -111,7 +162,7 @@ public class ExplorationHandler {
                                 + "on the shattered wind shield. You search it for anything "
                                 + "useful");
 
-                // TODO: Add an emergency medical kit to player inventory
+                // TODO: Add bandages to player inventory
                 break;
 
             case INSPECT_CORPSE:
@@ -127,12 +178,12 @@ public class ExplorationHandler {
                                 + "is open, and the officer's belongings are scattered "
                                 + "across the seat. You search the vehicle and find a firearm.");
 
-                // TODO: Add firearm and ammo to player inventory
+                // TODO: Add glock 19 and medkit to player inventory
                 break;
 
             case SEARCH_BACKPACK:
                 GameUtils.printNarrative(
-                        "You spot an abandoned backpack near a park bench. "
+                        "You open the backpack. "
                                 + "Inside, you find some snacks, a water bottle and a "
                                 + "motorcycle jacket");
 
@@ -180,5 +231,3 @@ public class ExplorationHandler {
         }
     }
 }
-
-

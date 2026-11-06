@@ -25,7 +25,7 @@ class WorldTest {
 
         assertNotNull(room);
         assertEquals("street-1", room.id());
-        assertEquals("Street 1", room.name());
+        assertEquals("Baker Street", room.name());
     }
 
     @Test

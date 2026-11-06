@@ -29,10 +29,11 @@ public class GameplayMenu {
         IO.println();
 
         for (int i = 0; i < options.size(); i++) {
-            IO.println((i + 1) + ". " + options.get(i).displayName());
+            IO.println(ConsoleColors.YELLOW + (i + 1) + ". " + ConsoleColors.RESET
+                    + options.get(i).displayName());
         }
 
-        IO.println("0. Go back");
+        IO.println(ConsoleColors.YELLOW + "0. " + ConsoleColors.RESET + "Go back");
         IO.println();
         IO.print("Choose an option: ");
 
