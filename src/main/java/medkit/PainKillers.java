@@ -6,7 +6,7 @@ public class PainKillers extends Medkit {
 
     // Default constructor providing 20 HP healing
     public PainKillers() {
-        super("PainKillers", "Restores 20HP ", 20);
+        super("Painkillers", "Increases maximum HP and restores 5 HP", 5);
     }
 
     // Flexible constructor if custom attributes are needed
