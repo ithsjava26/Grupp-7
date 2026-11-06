@@ -58,7 +58,7 @@ public class ItemUsage {
             return "The item had no effect.";
         }
 
-        inventory.removeItem(index);
+        inventory.removeItem(item);
 
         return "You used " + item.getName()
                 + " and restored " + restoredHealth + " HP.";
