@@ -1,10 +1,10 @@
-package Item;
+package item;
 
 public class Weapon extends Item {
     private int damageBonus;
 
-    public Weapon(String name, String description, int requiredLevel, int damageBonus) {
-        super(name, description, requiredLevel);
+    public Weapon(String name, String description, int damageBonus) {
+        super(name, description);
         this.damageBonus = damageBonus;
     }
 
