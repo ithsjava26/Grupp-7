@@ -7,7 +7,7 @@ import item.Armor;
 public class Hero extends GameCharacter {
 
     private final Inventory inventory;
-
+    private boolean nextAttackDoubled = false;
     private Weapon equippedWeapon;
     private Armor equippedArmor;
 
@@ -81,5 +81,20 @@ public class Hero extends GameCharacter {
                 : 0;
 
         return super.getDefense() + bonus;
+    }
+    public void activateEnergyBoost() {
+        nextAttackDoubled = true;
+    }
+
+    public boolean consumeEnergyBoost() {
+        if (nextAttackDoubled) {
+            nextAttackDoubled = false;
+            return true;
+        }
+
+        return false;
+    }
+    public boolean hasEnergyBoost() {
+        return nextAttackDoubled;
     }
 }

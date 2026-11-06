@@ -1,10 +1,12 @@
 package inventory;
 
 import combat.GameCharacter;
+import combat.Hero;
 import item.Food;
 import item.Item;
 import item.Medkit;
 import medkit.PainKillers;
+import medkit.EnergiDrink;
 
 public class ItemUsage {
 
@@ -38,6 +40,14 @@ public class ItemUsage {
 
         Item item = inventory.getItem(index);
 
+        // Energy drinks double the damage of the next attack.
+        if (item instanceof EnergiDrink && character instanceof Hero hero) {
+            hero.activateEnergyBoost();
+            inventory.removeItem(index);
+
+            return "You used " + item.getName()
+                    + ". Your next attack will deal double damage!";
+        }
         // Food permanently increases maximum health.
         if (item instanceof Food food) {
             int healthIncrease = food.getHealAmount();

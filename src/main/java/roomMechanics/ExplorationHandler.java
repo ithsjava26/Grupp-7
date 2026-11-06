@@ -40,19 +40,11 @@ public class ExplorationHandler {
                 break;
 
             case SEARCH_DESKS:
+            case INSPECT_ABANDONED_CAR:
             case SEARCH_POLICE_CAR:
             case SEARCH_BACKPACK:
             case SEARCH_GROUND_FLOOR:
                 soundManager.playEffect(SoundManager.Effect.SEARCH);
-                break;
-
-            case OBSERVE_FIGURES:
-            case CALL_FOR_PARTNER:
-                soundManager.playEffect(SoundManager.Effect.ZOMBIE_GROAN);
-                break;
-
-            case INSPECT_ABANDONED_CAR:
-                soundManager.playEffect(SoundManager.Effect.CAR_CREAK);
                 break;
 
             case SEARCH_FOR_KEYS:
@@ -111,7 +103,7 @@ public class ExplorationHandler {
                     IO.println("1. What the hell is going on?");
                     IO.println("2. What do you mean, one of them?");
                     IO.println("3. What's with the axe?");
-                    IO.println("4. Leave");
+                    IO.println(ConsoleColors.YELLOW + "e. " + ConsoleColors.RESET + "Leave");
 
                     String choice = IO.readln();
 
@@ -151,7 +143,7 @@ public class ExplorationHandler {
                             addItemToInventory(inventory, new Fireaxe());
                             break;
 
-                        case "4":
+                        case "e":
                             GameUtils.printNarrative(
                                     "You give your co-worker a final nod as you head out.");
                             return;
@@ -247,10 +239,18 @@ public class ExplorationHandler {
     }
     private void addItemToInventory(Inventory inventory, Item item) {
         if (inventory.addItem(item)) {
-            IO.println("Item added to inventory: " + item.getName());
+            IO.println();
+            IO.print(ConsoleColors.YELLOW + "[SYSTEM] " + ConsoleColors.RESET);
+            IO.println(item.getName() + " added to inventory.");
         } else {
-            IO.println("Your inventory is full! You couldn't pick up "
-                    + item.getName() + ".");
+            IO.println();
+            IO.print(ConsoleColors.YELLOW + "[SYSTEM] " + ConsoleColors.RESET);
+            IO.println("Inventory full! " + item.getName()
+                    + " could not be picked up.");
         }
+
+        IO.println();
     }
+
 }
+

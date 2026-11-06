@@ -23,7 +23,7 @@ public class SoundManager {
         public enum Track { NONE, MAIN, BATTLE }
 
     public enum Effect {
-        LOOT, HIT, VICTORY, GAME_OVER,
+        LOOT, HIT, GUNSHOT, VICTORY, GAME_OVER,
         PHONE_ERROR,
         RADIO_STATIC,
         SEARCH,
@@ -242,6 +242,12 @@ public class SoundManager {
                     return concat(
                             tone(0, 0, 150, 0.30, true),      // crunchy noise burst
                             tone(160, 50, 200, 0.30, false)); // falling thud
+
+                case GUNSHOT:
+                    return concat(
+                            tone(0, 0, 35, 0.35, true),
+                            tone(180, 55, 100, 0.30, false),
+                            tone(0, 0, 45, 0.12, true));
                 case VICTORY:
                     return concat(
                             tone(523, 523, 130, 0.25, false),
@@ -285,18 +291,6 @@ public class SoundManager {
                             tone(0, 0, 25, 0, false),
                             tone(450, 450, 45, 0.20, false));
 
-                case CAR_CREAK:
-                    return concat(
-                            tone(180, 100, 350, 0.18, false),
-                            tone(100, 70, 250, 0.15, false));
-
-                case ZOMBIE_GROAN:
-                    return concat(
-                            tone(110, 95, 120, 0.30, false),   // wobbly start
-                            tone(95, 105, 120, 0.30, false),
-                            tone(105, 85, 120, 0.30, false),
-                            tone(0, 0, 60, 0.15, true),        // raspy noise burst
-                            tone(85, 50, 700, 0.30, false));   // long sinking groan
 
                 case KEYS:
                     return concat(

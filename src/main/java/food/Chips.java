@@ -5,6 +5,6 @@ import item.Food;
 public class Chips extends Food {
 
     public Chips() {
-        super("Chips", "A bag of salty chips.", 10);
+        super("Chips", "Permanently increases maximum HP by 10.", 10);
     }
 }

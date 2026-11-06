@@ -6,7 +6,7 @@ public class Glock19 extends Weapon {
 
     // Creates a Glock19 with 45 base damage
     public Glock19() {
-        super("Glock19", "Deals damage based on hit area", 45);
+        super("Glock 19", "Increases attack damage by 45 while equipped.", 45);
     }
 
     // Flexible constructor if custom attributes are needed

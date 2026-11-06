@@ -6,7 +6,7 @@ public class Fireaxe extends Weapon {
 
     // Creates a FireAxe with 20 base damage
     public Fireaxe() {
-        super("FireAxe", "Deals damage based on hit area", 20);
+        super("Fire Axe", "Increases attack damage by 20 while equipped.", 20);
     }
 
     // Flexible constructor if custom attributes are needed
