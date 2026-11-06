@@ -1,4 +1,4 @@
-package RoomMechanics;
+package roomMechanics;
 
 public enum ExplorationAction {
     LOOK_OUT_WINDOW,

@@ -1,4 +1,4 @@
-package RoomMechanics;
+package roomMechanics;
 
 public class ConsoleColors {
 
@@ -9,4 +9,3 @@ public class ConsoleColors {
     public static final String YELLOW = "\u001B[33m";
     public static final String RED = "\u001B[31m";
 }
-
