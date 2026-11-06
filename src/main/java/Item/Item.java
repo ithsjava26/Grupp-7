@@ -3,12 +3,11 @@ package Item;
 public abstract class Item {
     private String name;
     private String description;
-    private int requiredLevel;
 
-    public Item(String name, String description, int requiredLevel) {
+    public Item(String name, String description) {
         this.name = name;
         this.description = description;
-        this.requiredLevel = requiredLevel;
+
     }
 
     public String getName() {
@@ -19,12 +18,8 @@ public abstract class Item {
         return description;
     }
 
-    public int getRequiredLevel() {
-        return requiredLevel;
-    }
-
     @Override
     public String toString() {
-        return name + " (Level " + requiredLevel + ") - " + description;
+        return name + " - " + description;
     }
 }
