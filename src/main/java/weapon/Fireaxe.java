@@ -14,9 +14,5 @@ public class Fireaxe extends Weapon {
         super(name, description, damage);
     }
 
-    public int calculateDamage(HitArea hitArea) {
-        return getDamageBonus() * hitArea.getMultiplier();
-    }
-
 
 }
