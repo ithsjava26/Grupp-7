@@ -169,7 +169,8 @@ public class GameEngine {
 
                 explorationHandler.handleExploration(
                         selectedExploration.action(),
-                        playerName);
+                        playerName,
+                        player.getInventory());
 
                 if (!selectedExploration.repeatable()) {
                     completedActions.add(selectedExploration.action());
