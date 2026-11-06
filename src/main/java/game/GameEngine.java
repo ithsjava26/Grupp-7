@@ -1,8 +1,9 @@
+
 package game;
 
+import audio.SoundManager;
 import combat.*;
 import roomMechanics.*;
-import combat.CombatResult;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +11,8 @@ import java.util.Set;
 public class GameEngine {
 
     private final World world = new World();
-    private final ExplorationHandler explorationHandler = new ExplorationHandler();
+    private final SoundManager soundManager = new SoundManager();
+    private final ExplorationHandler explorationHandler = new ExplorationHandler(soundManager);
     private final GameplayMenu gameplayMenu = new GameplayMenu();
     private final String playerName;
     private final Hero player;
@@ -33,7 +35,7 @@ public class GameEngine {
         );
     }
 
-    public void enterRoom(Room room) { //Prints the room heading and description.
+    public void enterRoom(Room room) {
         IO.println(ConsoleColors.YELLOW + "=========== " + room.name().toUpperCase()
                 + " ===========" + ConsoleColors.RESET);
         IO.println();
@@ -53,7 +55,7 @@ public class GameEngine {
         }
     }
 
-    public String getPlayerChoice() {  //	Displays the menu and returns the player's selection.
+    public String getPlayerChoice() {
         Room nextRoom = world.getNextRoom(currentRoom);
         String nextRoomName = nextRoom != null
                 ? nextRoom.name()
@@ -63,6 +65,9 @@ public class GameEngine {
     }
 
     public void startGame() {
+        soundManager.start();
+        soundManager.setMusic(SoundManager.Track.MAIN);
+
         currentRoom = world.getStartingRoom();
         displayCurrentRoom(currentRoom);
 
@@ -94,7 +99,7 @@ public class GameEngine {
                     break;
 
                 case "4":
-                    //moves player to next room
+                    // Moves player to next room
                     Room nextRoom = world.getNextRoom(currentRoom);
 
                     if (nextRoom == null) {
@@ -111,7 +116,7 @@ public class GameEngine {
                     GameUtils.pauseForUser();
                     break;
 
-                case "0": //exits gameplay loop
+                case "0": // Exits gameplay loop
                     IO.println("Returning to main menu...");
                     gameRunning = false;
                     break;
@@ -120,6 +125,8 @@ public class GameEngine {
                     IO.println("Invalid option. Please try again.");
             }
         }
+
+        soundManager.shutdown();
     }
 
 
@@ -213,6 +220,7 @@ public class GameEngine {
             default -> List.of();
         };
     }
+
     private boolean startEncounter(Room room) {
         if (completedEncounters.contains(room.id())) {
             return true;
@@ -228,19 +236,28 @@ public class GameEngine {
         IO.println(ConsoleColors.RED + "!!! ENEMY ENCOUNTER !!!" + ConsoleColors.RESET);
         GameUtils.pauseForCombat();
 
+        // Switch to battle music
+        soundManager.setMusic(SoundManager.Track.BATTLE);
+
         CombatResult result = combatManager.startCombat(player, enemies);
 
         completedEncounters.add(room.id());
 
         if (result == CombatResult.DEFEAT) {
+            soundManager.setMusic(SoundManager.Track.NONE);
+            soundManager.playEffect(SoundManager.Effect.GAME_OVER);
+
             GameUtils.printWarning("You have been overwhelmed. Your journey ends here.");
             return false;
         }
+
+        // Resume main music after victory
+        soundManager.setMusic(SoundManager.Track.MAIN);
+        soundManager.playEffect(SoundManager.Effect.VICTORY);
 
         GameUtils.printSystemMessage("The area is clear. You can move on.");
         GameUtils.pauseForUser();
 
         return true;
     }
-
 }
