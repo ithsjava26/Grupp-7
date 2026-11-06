@@ -8,7 +8,7 @@ package combat;
 public abstract class GameCharacter {
         private final String name;
         private int health;
-        private final int maxHealth;
+        private int maxHealth;
         private final int attack;
         private final int defense;
         private AttackStrategy attackStrategy;
@@ -71,6 +71,7 @@ public abstract class GameCharacter {
         if (amount < 0) {
             throw new IllegalArgumentException("Healing amount can not be negative");
         }
-        health = (int) Math.min((long) maxHealth, (long) health + amount);
+        health += amount;
+        maxHealth = Math.max(maxHealth, health);
     }
-}
+    }
