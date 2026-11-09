@@ -1,13 +1,9 @@
-package item;
+package Item;
 
 public abstract class Item {
     private String name;
     private String description;
     private int requiredLevel;
-
-    public Item(String name, String description) {
-        this(name, description, 1);
-    }
 
     public Item(String name, String description, int requiredLevel) {
         this.name = name;

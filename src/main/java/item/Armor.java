@@ -1,11 +1,7 @@
-package item;
+package Item;
 
 public class Armor extends Item {
     private int defenseBonus;
-
-    public Armor(String name, String description, int defenseBonus) {
-        this(name, description, 1, defenseBonus);
-    }
 
     public Armor(String name, String description, int requiredLevel, int defenseBonus) {
         super(name, description, requiredLevel);

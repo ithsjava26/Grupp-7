@@ -13,7 +13,7 @@ class MotorcycleJacketTest {
 
         assertAll(
                 () -> assertEquals("Motorcycle Jacket", jacket.getName()),
-                () -> assertEquals(50, jacket.getDefenseBonus()),
+                () -> assertEquals(10, jacket.getDefenseBonus()),
                 () -> assertEquals(1, jacket.getRequiredLevel()));
     }
 

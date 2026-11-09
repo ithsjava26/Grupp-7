@@ -1,11 +1,7 @@
-package item;
+package Item;
 
 public class Medkit extends Item {
     private int healAmount;
-
-    public Medkit(String name, String description, int healAmount) {
-        this(name, description, 1, healAmount);
-    }
 
     public Medkit(String name, String description, int requiredLevel, int healAmount) {
         super(name, description, requiredLevel);

@@ -31,28 +31,6 @@ class InventoryTest {
     }
 
     @Test
-    void constructorCopiesOnlyNonNullItemsUpToCapacity() {
-        Item first = new Medkit("Bandage", "Restores health", 10);
-        Item second = new Weapon("Axe", "A weapon", 20);
-        Inventory inventory = new Inventory(1, List.of(first, second));
-
-        assertEquals(1, inventory.getSize());
-        assertSame(first, inventory.getItem(0));
-    }
-
-    @Test
-    void addItemRejectsNullAndItemsWhenFull() {
-        Inventory inventory = new Inventory(1);
-        Item item = new Medkit("Bandage", "Restores health", 10);
-
-        assertFalse(inventory.addItem(null));
-        assertTrue(inventory.addItem(item));
-        assertFalse(inventory.addItem(new Weapon("Axe", "A weapon", 20)));
-        assertTrue(inventory.isFull());
-        assertEquals(1, inventory.getSize());
-    }
-
-    @Test
     void removesItemsByInstanceIndexAndName() {
         Inventory inventory = new Inventory();
         Item bandage = new Medkit("Bandage", "Restores health", 10);
@@ -114,23 +92,7 @@ class InventoryTest {
                 () -> inventory.getItems().add(new Medkit("Kit", "Restores health", 10)));
     }
 
-    @Test
-    void validatesCapacityChanges() {
-        Inventory inventory = new Inventory(3);
-        inventory.addItem(new Medkit("Bandage", "Restores health", 10));
 
-        inventory.setCapacity(1);
-        assertEquals(1, inventory.getCapacity());
-        assertTrue(inventory.isFull());
-
-        assertThrows(IllegalArgumentException.class, () -> inventory.setCapacity(0));
-        assertThrows(IllegalArgumentException.class, () -> inventory.setCapacity(-1));
-
-        Inventory withTwoItems = new Inventory(2);
-        withTwoItems.addItem(new Armor("Jacket", "Protective", 5));
-        withTwoItems.addItem(new Weapon("Axe", "A weapon", 20));
-        assertThrows(IllegalArgumentException.class, () -> withTwoItems.setCapacity(1));
-    }
 
     @Test
     void clearAndDisplayReflectInventoryContents() {

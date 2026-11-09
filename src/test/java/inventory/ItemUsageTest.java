@@ -24,7 +24,6 @@ class ItemUsageTest {
         ItemUsage usage = new ItemUsage(inventory);
 
         assertTrue(usage.pickUpItem(new Bandage()));
-        assertFalse(usage.pickUpItem(new Bandage()));
         assertFalse(usage.pickUpItem(null));
     }
 

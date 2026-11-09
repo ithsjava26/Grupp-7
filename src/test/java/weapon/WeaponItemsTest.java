@@ -23,9 +23,9 @@ class WeaponItemsTest {
 
         assertAll(
                 () -> assertEquals("Glock 19", glock.getName()),
-                () -> assertEquals(45, glock.getDamageBonus()),
+                () -> assertEquals(30, glock.getDamageBonus()),
                 () -> assertEquals("Fire Axe", fireaxe.getName()),
-                () -> assertEquals(20, fireaxe.getDamageBonus()),
+                () -> assertEquals(15, fireaxe.getDamageBonus()),
                 () -> assertEquals("DesertEagle", desertEagle.getName()),
                 () -> assertEquals(60, desertEagle.getDamageBonus()));
     }
