@@ -70,10 +70,6 @@ encounters. When enemies appear, the battle continues until one side falls.
 ## 🚀 Getting started
 
 
-README.md som innehåller: projektbeskrivning, instruktioner för att köra spelet, vem som
-ansvarat för vilken modul, vilka designmönster som använts och varför, samt en gruppreflektion
-kring Git-samarbetet — vad fungerade bra och hur löstes eventuella konflikte
-
 ## 👥 Responsibilities within the group: 
 
 
