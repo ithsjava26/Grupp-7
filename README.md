@@ -80,7 +80,7 @@ kring Git-samarbetet — vad fungerade bra och hur löstes eventuella konflikte
 | Package | Contains | Module | Owner |
 |---------|----------|--------|-------|
 | combat | Hero, enemies, attack strategies and battles | Combat & characters | Najima (A) |
-| item | Base item classes (came in with #28, items model) | Items & inventory | Leonardo (B) |
+| item | Base item classes | Items & inventory | Leonardo (B) |
 | weapon | Weapons | Items & inventory | Leonardo (B) |
 | armor | Armour, including the motorcycle jacket | Items & inventory | Leonardo (B) |
 | food | Food items | Items & inventory | Leonardo (B) |
