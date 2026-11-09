@@ -5,8 +5,8 @@ import combat.Hero;
 import item.Food;
 import item.Item;
 import item.Medkit;
-import medkit.PainKillers;
 import medkit.EnergiDrink;
+import medkit.PainKillers;
 
 public class ItemUsage {
 

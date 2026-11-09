@@ -1,4 +1,3 @@
-
 package inventory;
 
 import item.Item;
@@ -166,7 +165,7 @@ public class Inventory {
     /**
      * Returns all items of a specific type (e.g. Weapon, Armor, Medkit).
      *
-     * @param <T> the item subtype
+     * @param <T>  the item subtype
      * @param type the Class of the subtype
      * @return a list containing items of the specified type
      */
@@ -193,18 +192,6 @@ public class Inventory {
         return capacity;
     }
 
-    /**
-     * Updates the legacy capacity setting.
-     * This does not limit how many items can be stored.
-     *
-     * @param capacity new capacity, must be greater than 0
-     */
-    public void setCapacity(int capacity) {
-        if (capacity <= 0) {
-            throw new IllegalArgumentException("Capacity must be greater than 0");
-        }
-        this.capacity = capacity;
-    }
 
     /**
      * Returns the number of items currently in the inventory.

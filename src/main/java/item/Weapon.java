@@ -1,7 +1,7 @@
 package item;
 
 public class Weapon extends Item {
-    private int damageBonus;
+    private final int damageBonus;
 
     public Weapon(String name, String description, int damageBonus) {
         this(name, description, 1, damageBonus);
