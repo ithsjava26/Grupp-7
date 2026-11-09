@@ -4,10 +4,10 @@ import item.Armor;
 
 public class MotorcycleJacket extends Armor {
 
-    // Default constructor providing 50 Defense Armor
+    // Default constructor providing 10 Defense Armor
     public MotorcycleJacket() {
-
-        super("Motorcycle Jacket", "Increases defence by 50 while equipped.", 50);
+        super("Motorcycle Jacket",
+                "Increases defence by 10 while equipped.", 10);
     }
 
     // Flexible constructor if custom attributes are needed
