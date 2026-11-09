@@ -193,18 +193,6 @@ public class Inventory {
         return capacity;
     }
 
-    /**
-     * Updates the legacy capacity setting.
-     * This does not limit how many items can be stored.
-     *
-     * @param capacity new capacity, must be greater than 0
-     */
-    public void setCapacity(int capacity) {
-        if (capacity <= 0) {
-            throw new IllegalArgumentException("Capacity must be greater than 0");
-        }
-        this.capacity = capacity;
-    }
 
     /**
      * Returns the number of items currently in the inventory.
