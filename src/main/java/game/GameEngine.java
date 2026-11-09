@@ -118,7 +118,7 @@ public class GameEngine {
                     GameUtils.pauseForUser();
                     break;
 
-                case "0": // Exits gameplay loop
+                case "e": // Exits gameplay loop
                     IO.println("Returning to main menu...");
                     gameRunning = false;
                     break;
@@ -172,7 +172,7 @@ public class GameEngine {
                 explorationHandler.handleExploration(
                         selectedExploration.action(),
                         playerName,
-                        player.getInventory());
+                        player);
 
                 if (!selectedExploration.repeatable()) {
                     completedActions.add(selectedExploration.action());
@@ -209,24 +209,26 @@ public class GameEngine {
         GameUtils.pauseForUser();
     }
 
+
     private List<Enemy> createEnemiesForRoom(Room room) {
         return switch (room.id()) {
             case "street-2" -> List.of(
-                    new Enemy("Infected Civilian", 55, 55, 11, 3, new MeleeAttack())
+                    new Enemy("Infected Civilian", 65, 65, 13, 4, new MeleeAttack())
             );
 
             case "park-2" -> List.of(
-                    new Enemy("Infected Runner", 35, 35, 9, 2, new MeleeAttack()),
-                    new Enemy("Infected Heavy", 50, 50, 11, 4, new HeavyAttack())
+                    new Enemy("Infected Runner", 50, 50, 12, 3, new MeleeAttack()),
+                    new Enemy("Infected Heavy", 75, 75, 16, 5, new HeavyAttack())
             );
 
             case "garage" -> List.of(
-                    new Enemy("Your Partner", 70, 70, 10, 4, new HeavyAttack())
+                    new Enemy("Your Partner", 90, 90, 15, 5, new HeavyAttack())
             );
 
             default -> List.of();
         };
     }
+
 
     private boolean startEncounter(Room room) {
         if (completedEncounters.contains(room.id())) {
@@ -280,7 +282,7 @@ public class GameEngine {
 
             choice = choice.trim();
 
-            if (choice.equals("0")) {
+            if (choice.equals("e")) {
                 return;
             }
 
@@ -378,11 +380,8 @@ public class GameEngine {
                 return;
 
             } else if (item instanceof Food || item instanceof Medkit) {
-                if (confirmItemUse(item)) {
-                    int index = player.getInventory().getItems().indexOf(item);
-                    IO.println(itemUsage.useItem(index, player));
-                }
-
+                int index = player.getInventory().getItems().indexOf(item);
+                IO.println(itemUsage.useItem(index, player));
                 GameUtils.pauseForUser();
                 return;
             }
@@ -390,17 +389,5 @@ public class GameEngine {
             GameUtils.pauseForUser();
             return;
         }
-    }
-    private boolean confirmItemUse(Item item) {
-        IO.println();
-        IO.println("Do you want to consume " + item.getName() + "?");
-        IO.println(ConsoleColors.YELLOW + "1. Yes" + ConsoleColors.RESET);
-        IO.println(ConsoleColors.YELLOW + "0. No" + ConsoleColors.RESET);
-        IO.println();
-        IO.print("Choose an option: ");
-
-        String choice = IO.readln();
-
-        return choice != null && choice.trim().equals("1");
     }
 }

@@ -1,14 +1,18 @@
 
 package roomMechanics;
 
+import combat.Hero;
 import inventory.Inventory;
+import item.Armor;
 import item.Item;
+import item.Weapon;
 import medkit.*;
 import food.*;
 import weapon.Fireaxe;
 import weapon.Glock19;
 import armor.MotorcycleJacket;
 import keyitem.CarKeys;
+import keyitem.EngagementRing;
 import game.GameUtils;
 import audio.SoundManager;
 
@@ -23,7 +27,7 @@ public class ExplorationHandler {
     public void handleExploration(
             ExplorationAction action,
             String playerName,
-            Inventory inventory) {
+            Hero player) {
 
         // Play sound effects for exploration actions
         switch (action) {
@@ -87,8 +91,8 @@ public class ExplorationHandler {
                         "You search through the cluttered desks"
                                 + " and grab whatever could be useful.");
 
-                addItemToInventory(inventory, new PainKillers());
-                addItemToInventory(inventory, new EnergiDrink());
+                addItemToInventory(player, new PainKillers());
+                addItemToInventory(player, new EnergiDrink());
                 break;
 
             case TALK_TO_COWORKER:
@@ -140,7 +144,7 @@ public class ExplorationHandler {
                                             + "you're heading outside. Im gonna barricade "
                                             + "myself in here and wait for help. Here, take it.");
 
-                            addItemToInventory(inventory, new Fireaxe());
+                            addItemToInventory(player, new Fireaxe());
                             break;
 
                         case "e":
@@ -166,7 +170,7 @@ public class ExplorationHandler {
                                 + "on the shattered wind shield. You search it for anything "
                                 + "useful");
 
-                addItemToInventory(inventory, new Bandage());
+                addItemToInventory(player, new Bandage());
                 break;
 
             case INSPECT_CORPSE:
@@ -182,8 +186,8 @@ public class ExplorationHandler {
                                 + "is open, and the officer's belongings are scattered "
                                 + "across the seat. You search the vehicle and find a firearm.");
 
-                addItemToInventory(inventory, new Glock19());
-                addItemToInventory(inventory, new FirstAidKit());
+                addItemToInventory(player, new Glock19());
+                addItemToInventory(player, new FirstAidKit());
                 break;
 
             case SEARCH_BACKPACK:
@@ -192,9 +196,9 @@ public class ExplorationHandler {
                                 + "Inside, you find some snacks, a water bottle and a "
                                 + "motorcycle jacket");
 
-                addItemToInventory(inventory, new Chips());
-                addItemToInventory(inventory, new ProteinBar());
-                addItemToInventory(inventory, new MotorcycleJacket());
+                addItemToInventory(player, new Chips());
+                addItemToInventory(player, new ProteinBar());
+                addItemToInventory(player, new MotorcycleJacket());
                 break;
 
             case SEARCH_GROUND_FLOOR:
@@ -208,7 +212,7 @@ public class ExplorationHandler {
                 GameUtils.printNarrative(
                         "You search the bedroom and eventually find the car keys.");
 
-                addItemToInventory(inventory, new CarKeys());
+                addItemToInventory(player, new CarKeys());
                 break;
 
             case CALL_FOR_PARTNER:
@@ -218,15 +222,26 @@ public class ExplorationHandler {
                                 + "you hear a faint noise. Could it be?");
                 break;
 
+
             case SEARCH_PARTNER:
                 GameUtils.printNarrative(
                         "You approach the body and kneel beside them, unable to "
                                 + "process what you're seeing.");
+
                 GameUtils.printDialogue(
                         "\"I'm so, so sorry,\" you whisper as you wipe the hair "
                                 + "from their warped face.");
+
+                GameUtils.printNarrative(
+                        "You gently slip the ring off of their finger and  "
+                                + "hold it in your trembling hand. ");
+
+
+                addItemToInventory(player, new EngagementRing());
+
                 GameUtils.printWarning("You start hearing zombies outside.");
                 break;
+
 
             case GET_IN_CAR:
                 GameUtils.printNarrative(
@@ -237,11 +252,44 @@ public class ExplorationHandler {
                 break;
         }
     }
-    private void addItemToInventory(Inventory inventory, Item item) {
+
+    private void addItemToInventory(Hero player, Item item) {
+        Inventory inventory = player.getInventory();
+
         if (inventory.addItem(item)) {
             IO.println();
             IO.print(ConsoleColors.YELLOW + "[SYSTEM] " + ConsoleColors.RESET);
             IO.println(item.getName() + " added to inventory.");
+
+            if (item instanceof Weapon weapon) {
+                IO.println();
+                IO.println("Do you want to equip " + item.getName() + " now?");
+                IO.println(ConsoleColors.YELLOW + "1. Yes" + ConsoleColors.RESET);
+                IO.println(ConsoleColors.YELLOW + "e. No" + ConsoleColors.RESET);
+                IO.print("Choose an option: ");
+
+                String choice = IO.readln();
+
+                if ("1".equals(choice == null ? null : choice.trim())) {
+                    player.equipWeapon(weapon);
+                    IO.println("Weapon equipped: " + weapon.getName());
+                }
+
+            } else if (item instanceof Armor armor) {
+                IO.println();
+                IO.println("Do you want to equip " + item.getName() + " now?");
+                IO.println(ConsoleColors.YELLOW + "1. Yes" + ConsoleColors.RESET);
+                IO.println(ConsoleColors.YELLOW + "e. No" + ConsoleColors.RESET);
+                IO.print("Choose an option: ");
+
+                String choice = IO.readln();
+
+                if ("1".equals(choice == null ? null : choice.trim())) {
+                    player.equipArmor(armor);
+                    IO.println("Armour equipped: " + armor.getName());
+                }
+            }
+
         } else {
             IO.println();
             IO.print(ConsoleColors.YELLOW + "[SYSTEM] " + ConsoleColors.RESET);
@@ -251,6 +299,5 @@ public class ExplorationHandler {
 
         IO.println();
     }
-
 }
 

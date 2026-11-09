@@ -11,6 +11,7 @@ public class MeleeAttack implements AttackStrategy {
 
     @Override
     public int calculateDamage(GameCharacter attacker, GameCharacter target) {
-        return Math.max(1, attacker.getAttack() - target.getDefense());
+        int reducedDefense = target.getDefense() / 2;
+        return Math.max(1, attacker.getAttack() - reducedDefense);
     }
 }

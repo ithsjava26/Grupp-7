@@ -10,7 +10,7 @@ import java.util.Random;
 public class HeavyAttack implements AttackStrategy {
 
     private static final double HIT_CHANCE = 0.75;
-    private static final int DAMAGE_MULTIPLIER = 2;
+    private static final double  DAMAGE_MULTIPLIER = 1.5;
     private static final int MINIMUM_DAMAGE = 1;
 
     private final Random random;
@@ -29,7 +29,11 @@ public class HeavyAttack implements AttackStrategy {
             return 0;
         }
 
-        int rawDamage = attacker.getAttack() * DAMAGE_MULTIPLIER - target.getDefense();
+        int reducedDefense = target.getDefense() / 2;
+        int rawDamage = (int) Math.round(
+                attacker.getAttack() * DAMAGE_MULTIPLIER - reducedDefense
+        );
+
         return Math.max(MINIMUM_DAMAGE, rawDamage);
     }
 
