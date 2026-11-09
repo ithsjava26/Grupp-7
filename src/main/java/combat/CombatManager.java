@@ -155,7 +155,7 @@ public class CombatManager {
 
         String input = IO.readln();
 
-        if (input == null || input.isBlank() || input.trim().equals("0")) {
+        if (input == null || input.isBlank() || input.trim().equals("e")) {
             return false;
         }
 
@@ -199,7 +199,7 @@ public class CombatManager {
     private void performAttack(GameCharacter attacker, GameCharacter target) {
         int damage = attacker.getAttackStrategy().calculateDamage(attacker, target);
 
-        if (attacker instanceof Hero hero && hero.consumeEnergyBoost()) {
+        if (damage > 0 && attacker instanceof Hero hero && hero.consumeEnergyBoost()) {
             damage *= 2;
             IO.println(ConsoleColors.YELLOW + "[SYSTEM] Energy boost activated! Double damage!"
                     + ConsoleColors.RESET);
