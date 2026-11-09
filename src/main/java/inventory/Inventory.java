@@ -1,3 +1,4 @@
+
 package inventory;
 
 import item.Item;
@@ -8,10 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Represents an inventory that stores items up to a specified capacity.
+ * Represents an inventory that stores items without a capacity limit.
  */
 public class Inventory {
 
+    // Legacy capacity settings retained for compatibility.
     public static final int DEFAULT_CAPACITY = 10;
 
     private final List<Item> items;
@@ -33,7 +35,7 @@ public class Inventory {
         this(capacity);
         if (initialItems != null) {
             for (Item item : initialItems) {
-                if (item != null && !isFull()) {
+                if (item != null) {
                     this.items.add(item);
                 }
             }
@@ -41,13 +43,13 @@ public class Inventory {
     }
 
     /**
-     * Adds an item to the inventory if space is available and the item is not null.
+     * Adds a non-null item to the inventory.
      *
      * @param item the item to add
      * @return true if the item was added, false otherwise
      */
     public boolean addItem(Item item) {
-        if (item == null || isFull()) {
+        if (item == null) {
             return false;
         }
         return items.add(item);
@@ -164,7 +166,7 @@ public class Inventory {
     /**
      * Returns all items of a specific type (e.g. Weapon, Armor, Medkit).
      *
-     * @param <T>  the item subtype
+     * @param <T> the item subtype
      * @param type the Class of the subtype
      * @return a list containing items of the specified type
      */
@@ -182,26 +184,24 @@ public class Inventory {
     }
 
     /**
-     * Returns the maximum capacity of the inventory.
+     * Returns the legacy capacity setting.
+     * Capacity no longer limits inventory size.
      *
-     * @return capacity
+     * @return configured capacity
      */
     public int getCapacity() {
         return capacity;
     }
 
     /**
-     * Updates the capacity of the inventory.
+     * Updates the legacy capacity setting.
+     * This does not limit how many items can be stored.
      *
-     * @param capacity new capacity (must be greater than 0 and >= current size)
-     * @throws IllegalArgumentException if capacity <= 0 or capacity < current size
+     * @param capacity new capacity, must be greater than 0
      */
     public void setCapacity(int capacity) {
         if (capacity <= 0) {
             throw new IllegalArgumentException("Capacity must be greater than 0");
-        }
-        if (capacity < items.size()) {
-            throw new IllegalArgumentException("Capacity cannot be less than current item count (" + items.size() + ")");
         }
         this.capacity = capacity;
     }
@@ -225,12 +225,12 @@ public class Inventory {
     }
 
     /**
-     * Checks if the inventory has reached its capacity.
+     * Inventory has no capacity limit.
      *
-     * @return true if full, false otherwise
+     * @return always false
      */
     public boolean isFull() {
-        return items.size() >= capacity;
+        return false;
     }
 
     /**
@@ -250,20 +250,27 @@ public class Inventory {
     }
 
     /**
-     * Formats the inventory into a readable string representation with item slots.
+     * Formats the inventory into a readable string representation.
      *
      * @return formatted inventory string
      */
     public String getDisplayString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("=== INVENTORY (").append(getSize()).append("/").append(capacity).append(") ===\n");
+        sb.append("=== INVENTORY (")
+                .append(getSize())
+                .append(" items) ===\n");
+
         if (items.isEmpty()) {
             sb.append("(Inventory is empty)\n");
         } else {
             for (int i = 0; i < items.size(); i++) {
-                sb.append(i + 1).append(". ").append(items.get(i).toString()).append("\n");
+                sb.append(i + 1)
+                        .append(". ")
+                        .append(items.get(i).toString())
+                        .append("\n");
             }
         }
+
         sb.append("========================");
         return sb.toString();
     }
