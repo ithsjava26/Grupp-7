@@ -49,7 +49,7 @@ public class MainMenu {
 
     public String startNewGame() {
         IO.println("Your journey begins...");
-        GameUtils.pauseForUser();
+        game.GameUtils.pauseForUser();
 
         IO.println("Choose a name for your character:");
 
@@ -61,7 +61,7 @@ public class MainMenu {
         }
 
         IO.println("Welcome, " + playerName + ".");
-        GameUtils.pauseForUser();
+        game.GameUtils.pauseForUser();
 
         return playerName;
     }

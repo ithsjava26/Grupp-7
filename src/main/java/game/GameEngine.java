@@ -16,7 +16,7 @@ public class GameEngine {
     private final World world = new World();
     private final SoundManager soundManager = new SoundManager();
     private final ExplorationHandler explorationHandler = new ExplorationHandler(soundManager);
-    private final GameplayMenu gameplayMenu = new GameplayMenu();
+    private final game.GameplayMenu gameplayMenu = new game.GameplayMenu();
     private final String playerName;
     private final Hero player;
     private Room currentRoom;
