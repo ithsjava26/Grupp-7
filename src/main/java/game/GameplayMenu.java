@@ -53,8 +53,7 @@ public class GameplayMenu {
             return;
         }
 
-        IO.println("Items (" + player.getInventory().getSize()
-                + "/" + player.getInventory().getCapacity() + "):");
+        IO.println("Items (" + player.getInventory().getSize() + "):");
         IO.println();
 
         for (int i = 0; i < player.getInventory().getSize(); i++) {
