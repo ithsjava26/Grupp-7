@@ -1,8 +1,8 @@
 package combat;
 
 import inventory.Inventory;
-import item.Weapon;
 import item.Armor;
+import item.Weapon;
 
 public class Hero extends GameCharacter {
 
@@ -82,6 +82,7 @@ public class Hero extends GameCharacter {
 
         return super.getDefense() + bonus;
     }
+
     public void activateEnergyBoost() {
         nextAttackDoubled = true;
     }
@@ -94,6 +95,7 @@ public class Hero extends GameCharacter {
 
         return false;
     }
+
     public boolean hasEnergyBoost() {
         return nextAttackDoubled;
     }

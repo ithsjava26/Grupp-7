@@ -6,12 +6,12 @@ package combat;
  * Subclasses can extend this class to create specific types of game characters.
  */
 public abstract class GameCharacter {
-        private final String name;
-        private int health;
-        private int maxHealth;
-        private final int attack;
-        private final int defense;
-        private AttackStrategy attackStrategy;
+    private final String name;
+    private final int attack;
+    private final int defense;
+    private int health;
+    private int maxHealth;
+    private AttackStrategy attackStrategy;
 
     protected GameCharacter(String name, int health, int maxHealth, int attack, int defense, AttackStrategy attackStrategy) {
         if (name == null || name.isBlank()) {
@@ -31,19 +31,22 @@ public abstract class GameCharacter {
         this.health = Math.max(0, Math.min(health, maxHealth));
         this.attackStrategy = attackStrategy;
     }
+
     public AttackStrategy getAttackStrategy() {
         return attackStrategy;
     }
+
     public void setAttackStrategy(AttackStrategy attackStrategy) {
-        if(attackStrategy == null) {
+        if (attackStrategy == null) {
             throw new IllegalArgumentException("attackStrategy can not be null");
         }
         this.attackStrategy = attackStrategy;
     }
 
-    public  String getName() {
+    public String getName() {
         return name;
     }
+
     public int getHealth() {
         return health;
     }
@@ -51,22 +54,26 @@ public abstract class GameCharacter {
     public int getMaxHealth() {
         return maxHealth;
     }
+
     public int getAttack() {
         return attack;
     }
+
     public int getDefense() {
         return defense;
     }
+
     public boolean isAlive() {
         return health > 0;
     }
 
     public void takeDamage(int amount) {
-     if (amount < 0) {
-         throw new IllegalArgumentException("Damage can not be negative");
-     }
-     health = Math.max(0, health - amount);
+        if (amount < 0) {
+            throw new IllegalArgumentException("Damage can not be negative");
+        }
+        health = Math.max(0, health - amount);
     }
+
     public void heal(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("Healing amount cannot be negative");

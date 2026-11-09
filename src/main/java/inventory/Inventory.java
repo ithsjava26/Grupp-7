@@ -1,4 +1,3 @@
-
 package inventory;
 
 import item.Item;
@@ -166,7 +165,7 @@ public class Inventory {
     /**
      * Returns all items of a specific type (e.g. Weapon, Armor, Medkit).
      *
-     * @param <T> the item subtype
+     * @param <T>  the item subtype
      * @param type the Class of the subtype
      * @return a list containing items of the specified type
      */
