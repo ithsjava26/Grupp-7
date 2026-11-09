@@ -1,19 +1,23 @@
 package roomMechanics;
 
+import armor.MotorcycleJacket;
+import audio.SoundManager;
 import combat.Hero;
+import food.Chips;
+import food.ProteinBar;
+import game.GameUtils;
 import inventory.Inventory;
 import item.Armor;
 import item.Item;
 import item.Weapon;
-import medkit.*;
-import food.*;
-import weapon.Fireaxe;
-import weapon.Glock19;
-import armor.MotorcycleJacket;
 import keyitem.CarKeys;
 import keyitem.EngagementRing;
-import game.GameUtils;
-import audio.SoundManager;
+import medkit.Bandage;
+import medkit.EnergiDrink;
+import medkit.FirstAidKit;
+import medkit.PainKillers;
+import weapon.Fireaxe;
+import weapon.Glock19;
 
 public class ExplorationHandler {
 

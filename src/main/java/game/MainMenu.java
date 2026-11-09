@@ -4,18 +4,6 @@ import roomMechanics.ConsoleColors;
 
 public class MainMenu {
 
-    public void displayMenu() {
-        IO.println(ConsoleColors.GREY + "==============================" + ConsoleColors.RESET);
-        IO.println(ConsoleColors.RED + "       THE LAST SHIFT" + ConsoleColors.RESET);
-        IO.println(ConsoleColors.GREY + "==============================" + ConsoleColors.RESET);
-        IO.println();
-        IO.println("1. Start New Game");
-        IO.println("2. Load Game");
-        IO.println("3. Exit");
-        IO.println();
-        IO.print("Choose an option: ");
-    }
-
     static void main() {
         MainMenu mainMenu = new MainMenu();
 
@@ -45,6 +33,18 @@ public class MainMenu {
                     IO.println("Invalid option. Please try again.");
             }
         }
+    }
+
+    public void displayMenu() {
+        IO.println(ConsoleColors.GREY + "==============================" + ConsoleColors.RESET);
+        IO.println(ConsoleColors.RED + "       THE LAST SHIFT" + ConsoleColors.RESET);
+        IO.println(ConsoleColors.GREY + "==============================" + ConsoleColors.RESET);
+        IO.println();
+        IO.println("1. Start New Game");
+        IO.println("2. Load Game");
+        IO.println("3. Exit");
+        IO.println();
+        IO.print("Choose an option: ");
     }
 
     public String startNewGame() {

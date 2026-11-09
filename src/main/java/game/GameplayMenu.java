@@ -5,6 +5,7 @@ import item.Item;
 import roomMechanics.ConsoleColors;
 import roomMechanics.ExplorationAction;
 import roomMechanics.ExplorationOption;
+
 import java.util.List;
 
 public class GameplayMenu {
@@ -63,7 +64,6 @@ public class GameplayMenu {
             default -> false;
         };
     }
-
 
 
     public void displayInventory(Hero player) {
