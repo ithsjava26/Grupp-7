@@ -1,4 +1,3 @@
-
 package roomMechanics;
 
 import combat.Hero;
@@ -104,10 +103,15 @@ public class ExplorationHandler {
 
                 while (true) {
                     IO.println("\nWhat do you ask?");
-                    IO.println("1. What the hell is going on?");
-                    IO.println("2. What do you mean, one of them?");
-                    IO.println("3. What's with the axe?");
-                    IO.println(ConsoleColors.YELLOW + "e. " + ConsoleColors.RESET + "Leave");
+
+                    IO.println(ConsoleColors.YELLOW + "1. " + ConsoleColors.RESET
+                            + "What the hell is going on?");
+                    IO.println(ConsoleColors.YELLOW + "2. " + ConsoleColors.RESET
+                            + "What do you mean, one of them?");
+                    IO.println(ConsoleColors.YELLOW + "3. " + ConsoleColors.RESET
+                            + "What's with the axe? 🔎");
+                    IO.println(ConsoleColors.YELLOW + "e. " + ConsoleColors.RESET
+                            + "Leave");
 
                     String choice = IO.readln();
 
@@ -300,4 +304,3 @@ public class ExplorationHandler {
         IO.println();
     }
 }
-

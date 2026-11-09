@@ -3,6 +3,7 @@ package game;
 import combat.Hero;
 import item.Item;
 import roomMechanics.ConsoleColors;
+import roomMechanics.ExplorationAction;
 import roomMechanics.ExplorationOption;
 import java.util.List;
 
@@ -27,12 +28,18 @@ public class GameplayMenu {
         return IO.readln();
     }
 
+
     public String runExplorationMenu(List<ExplorationOption> options) {
         IO.println();
 
         for (int i = 0; i < options.size(); i++) {
-            IO.println(ConsoleColors.YELLOW + (i + 1) + ". " + ConsoleColors.RESET
-                    + options.get(i).displayName());
+            ExplorationOption option = options.get(i);
+
+            String lootIcon = hasLoot(option.action()) ? " 🔎" : "";
+
+            IO.println(ConsoleColors.YELLOW + (i + 1) + ". "
+                    + ConsoleColors.RESET
+                    + option.displayName() + lootIcon);
         }
 
         IO.println(ConsoleColors.YELLOW + "e. " + ConsoleColors.RESET + "Go back");
@@ -41,6 +48,23 @@ public class GameplayMenu {
 
         return IO.readln();
     }
+
+
+    private boolean hasLoot(ExplorationAction action) {
+        return switch (action) {
+            case SEARCH_DESKS,
+                 TALK_TO_COWORKER,
+                 INSPECT_ABANDONED_CAR,
+                 SEARCH_POLICE_CAR,
+                 SEARCH_BACKPACK,
+                 SEARCH_FOR_KEYS,
+                 SEARCH_PARTNER -> true;
+
+            default -> false;
+        };
+    }
+
+
 
     public void displayInventory(Hero player) {
         IO.println();

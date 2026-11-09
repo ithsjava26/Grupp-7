@@ -132,6 +132,7 @@ public class GameEngine {
     }
 
 
+
     private void exploreCurrentRoom() {
 
         while (true) {
@@ -169,10 +170,21 @@ public class GameEngine {
 
                 var selectedExploration = options.get(selectedOption);
 
+                // NEW: Yellow divider BEFORE exploration
+                IO.println();
+                IO.println(ConsoleColors.YELLOW + "========================================"
+                        + ConsoleColors.RESET);
+                IO.println();
+
                 explorationHandler.handleExploration(
                         selectedExploration.action(),
                         playerName,
                         player);
+
+                // NEW: Yellow divider AFTER exploration
+                IO.println();
+                IO.println(ConsoleColors.YELLOW + "========================================"
+                        + ConsoleColors.RESET);
 
                 if (!selectedExploration.repeatable()) {
                     completedActions.add(selectedExploration.action());
@@ -189,6 +201,7 @@ public class GameEngine {
             }
         }
     }
+
 
     private void displayCharacterStatus() {
         IO.println();
