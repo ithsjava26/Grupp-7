@@ -1,4 +1,3 @@
-
 package game;
 
 import audio.SoundManager;
@@ -7,8 +6,8 @@ import inventory.ItemUsage;
 import item.*;
 import roomMechanics.*;
 
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class GameEngine {
@@ -19,10 +18,10 @@ public class GameEngine {
     private final GameplayMenu gameplayMenu = new GameplayMenu();
     private final String playerName;
     private final Hero player;
-    private Room currentRoom;
     private final Set<ExplorationAction> completedActions = new HashSet<>();
     private final CombatManager combatManager = new CombatManager();
     private final Set<String> completedEncounters = new HashSet<>();
+    private Room currentRoom;
     private boolean gameOver = false;
 
     public GameEngine(String playerName) {
@@ -169,10 +168,21 @@ public class GameEngine {
 
                 var selectedExploration = options.get(selectedOption);
 
+                // NEW: Yellow divider BEFORE exploration
+                IO.println();
+                IO.println(ConsoleColors.YELLOW + "========================================"
+                        + ConsoleColors.RESET);
+                IO.println();
+
                 explorationHandler.handleExploration(
                         selectedExploration.action(),
                         playerName,
                         player);
+
+                // NEW: Yellow divider AFTER exploration
+                IO.println();
+                IO.println(ConsoleColors.YELLOW + "========================================"
+                        + ConsoleColors.RESET);
 
                 if (!selectedExploration.repeatable()) {
                     completedActions.add(selectedExploration.action());
@@ -189,6 +199,7 @@ public class GameEngine {
             }
         }
     }
+
 
     private void displayCharacterStatus() {
         IO.println();
@@ -305,6 +316,7 @@ public class GameEngine {
             }
         }
     }
+
     private void handleSelectedItem(Item item, ItemUsage itemUsage) {
         while (true) {
             IO.println();

@@ -1,20 +1,23 @@
-
 package roomMechanics;
 
+import armor.MotorcycleJacket;
+import audio.SoundManager;
 import combat.Hero;
+import food.Chips;
+import food.ProteinBar;
+import game.GameUtils;
 import inventory.Inventory;
 import item.Armor;
 import item.Item;
 import item.Weapon;
-import medkit.*;
-import food.*;
-import weapon.Fireaxe;
-import weapon.Glock19;
-import armor.MotorcycleJacket;
 import keyitem.CarKeys;
 import keyitem.EngagementRing;
-import game.GameUtils;
-import audio.SoundManager;
+import medkit.Bandage;
+import medkit.EnergiDrink;
+import medkit.FirstAidKit;
+import medkit.PainKillers;
+import weapon.Fireaxe;
+import weapon.Glock19;
 
 public class ExplorationHandler {
 
@@ -104,10 +107,15 @@ public class ExplorationHandler {
 
                 while (true) {
                     IO.println("\nWhat do you ask?");
-                    IO.println("1. What the hell is going on?");
-                    IO.println("2. What do you mean, one of them?");
-                    IO.println("3. What's with the axe?");
-                    IO.println(ConsoleColors.YELLOW + "e. " + ConsoleColors.RESET + "Leave");
+
+                    IO.println(ConsoleColors.YELLOW + "1. " + ConsoleColors.RESET
+                            + "What the hell is going on?");
+                    IO.println(ConsoleColors.YELLOW + "2. " + ConsoleColors.RESET
+                            + "What do you mean, one of them?");
+                    IO.println(ConsoleColors.YELLOW + "3. " + ConsoleColors.RESET
+                            + "What's with the axe? 🔎");
+                    IO.println(ConsoleColors.YELLOW + "e. " + ConsoleColors.RESET
+                            + "Leave");
 
                     String choice = IO.readln();
 
@@ -300,4 +308,3 @@ public class ExplorationHandler {
         IO.println();
     }
 }
-

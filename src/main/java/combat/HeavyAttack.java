@@ -10,7 +10,7 @@ import java.util.Random;
 public class HeavyAttack implements AttackStrategy {
 
     private static final double HIT_CHANCE = 0.75;
-    private static final double  DAMAGE_MULTIPLIER = 1.5;
+    private static final double DAMAGE_MULTIPLIER = 1.5;
     private static final int MINIMUM_DAMAGE = 1;
 
     private final Random random;

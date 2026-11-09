@@ -1,14 +1,14 @@
-
 package combat;
+
+import inventory.Inventory;
+import inventory.ItemUsage;
+import item.Food;
+import item.Item;
+import item.Medkit;
+import roomMechanics.ConsoleColors;
 
 import java.util.ArrayList;
 import java.util.List;
-import inventory.ItemUsage;
-import inventory.Inventory;
-import item.Item;
-import item.Food;
-import item.Medkit;
-import roomMechanics.ConsoleColors;
 
 /**
  * Manages the combat between a player and a list of enemies.
