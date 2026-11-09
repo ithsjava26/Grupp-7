@@ -8,7 +8,7 @@ package combat;
 public abstract class GameCharacter {
         private final String name;
         private int health;
-        private final int maxHealth;
+        private int maxHealth;
         private final int attack;
         private final int defense;
         private AttackStrategy attackStrategy;
@@ -22,13 +22,22 @@ public abstract class GameCharacter {
             throw new IllegalArgumentException("maxHealth must be greater than 0");
         }
         if (attackStrategy == null) {
-            throw new IllegalArgumentException("atatckStrategy can not be null");
+            throw new IllegalArgumentException("attackStrategy can not be null");
         }
         this.name = name;
         this.maxHealth = maxHealth;
         this.attack = attack;
         this.defense = defense;
         this.health = Math.max(0, Math.min(health, maxHealth));
+        this.attackStrategy = attackStrategy;
+    }
+    public AttackStrategy getAttackStrategy() {
+        return attackStrategy;
+    }
+    public void setAttackStrategy(AttackStrategy attackStrategy) {
+        if(attackStrategy == null) {
+            throw new IllegalArgumentException("attackStrategy can not be null");
+        }
         this.attackStrategy = attackStrategy;
     }
 
@@ -52,16 +61,6 @@ public abstract class GameCharacter {
         return health > 0;
     }
 
-
-    public AttackStrategy getAttackStrategy() {
-        return attackStrategy;
-    }
-    public void setAttackStrategy(AttackStrategy attackStrategy) {
-        if (attackStrategy == null) {
-            throw new IllegalArgumentException("attackStrategy can not be null");
-        }
-        this.attackStrategy = attackStrategy;
-    }
     public void takeDamage(int amount) {
      if (amount < 0) {
          throw new IllegalArgumentException("Damage can not be negative");
@@ -70,8 +69,17 @@ public abstract class GameCharacter {
     }
     public void heal(int amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException("Healing amount can not be negative");
+            throw new IllegalArgumentException("Healing amount cannot be negative");
         }
-        health = (int) Math.min((long) maxHealth, (long) health + amount);
+
+        health = Math.min(maxHealth, health + amount);
     }
-}
+
+    public void increaseMaxHealth(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Health increase cannot be negative");
+        }
+
+        maxHealth += amount;
+    }
+    }
