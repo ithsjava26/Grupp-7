@@ -112,6 +112,19 @@ to resolve these issues and sought help from our teacher and CodeRabbit when nec
 communication, and asking for help when needed, we became better at identifying and solving problems throughout 
 the development process.
 
+Group reflektion on Git Collaboration
+
+Over the course of the project, we gained valuable experience collaborating through Git and GitHub. We used separate branches, pull requests and code reviews to develop and integrate the game's different modules. In practice, the handling of pull requests, code reviews and merges was mainly done by two group members.
+
+One of the project's biggest challenges was an uneven distribution of effort and responsibility, as well as a lack of communication during parts of the development process. During the first week, one group member had no commits, which made it difficult to see how the work was progressing. Even after we followed up, it took further time before the work became visible in our shared repository.
+
+We also had difficulties coordinating the modules with each other. Some functionality was implemented outside the requirements we had agreed on together, for example level requirements for equipment even though the game has no level system. This meant extra work adapting the code and making sure the different systems worked together.
+
+During the final week of the project, basic functionality for the inventory, item pickup and a number of finished items was delivered. These formed a useful foundation for further development, but they needed to be completed and integrated with the other systems to work in the finished game.
+
+The division of work therefore ended up differing from the original plan. Two group members had to take greater responsibility for the project's coordination, follow-up, code review, integration and further development, in addition to their own assigned modules. We handled the challenges through clearer task descriptions, recurring check-ins, joint debugging and adjustments to the code. At the same time, we could have worked in a more structured way, with shared milestones, clear deadlines and regular updates on the status of the work.
+
+An important lesson is that a well-functioning Git collaboration is not only about technical tools, but also requires transparency, continuous communication, independent responsibility and an understanding of how the different modules work together.
 
 ### What we learned
 We learned how classes from three different packages interact within a single program through the use of abstract
